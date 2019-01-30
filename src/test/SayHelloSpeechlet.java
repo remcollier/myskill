@@ -1,12 +1,20 @@
 package test;
 
 import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.*;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 
+import java.util.Map;
+
 public class SayHelloSpeechlet implements Speechlet {
+    GamePlayInfo game = new GamePlayInfo(1,2);
+    int current = 0;
+    private static final String LETTERS = "letters";
+
+
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException
     {
@@ -26,8 +34,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
         System.out.println("intentName : " + intentName);
 
-        if ("SayHelloIntent".equals(intentName)) {
-            return getHelloResponse();
+        if ("Answer".equals(intentName)) {
+            return gameMode(intent,session);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
@@ -42,13 +50,18 @@ public class SayHelloSpeechlet implements Speechlet {
      */
     private SpeechletResponse getWelcomeResponse()
     {
-        String speechText = "Welcome to the Alexa World, you can say hello to me, I can respond." +
-                "Thanks, How to do in java user.";
+        // setting up sample questions
+        game.setQuestions();
+        game.assignLettersToAns(current);
+//        session.setAttribute(COLOR_KEY, favoriteColor);
+
+        String speechText = "Welcome to Abdul's Trivia game," + "The Quiz we will be playing is called  "+ game.getQuizname()+
+                "The first question is "+ game.getQuestion(0);
 
         // Create the Simple card content.
 
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -69,16 +82,29 @@ public class SayHelloSpeechlet implements Speechlet {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getHelloResponse()
+    private SpeechletResponse gameMode(final Intent intent, final Session session)
     {
-        String speechText = "Hello how to do in java user. It's a pleasure to talk with you. "
-                + "Currently I can only say simple things, "
-                + "but you can educate me to do more complicated tasks later. Happy to learn.";
+        String speechText= null;
+        Map<String, Slot> slots = intent.getSlots();
+        Slot s = slots.get(LETTERS);
+        String user_input = s.getValue();
+        if(game.checkAnswer(user_input,current))
+        {
 
+             speechText ="Well Done ";
+             game.addScore();
+
+        }
+        else
+        {
+             speechText = game.output_wrong(game.getAnswer(current));
+        }
+
+        speechText += game.output_question(" Well done it worked mate");
         // Create the Simple card content.
 
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -101,7 +127,7 @@ public class SayHelloSpeechlet implements Speechlet {
         // Create the Simple card content.
 
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -129,5 +155,6 @@ public class SayHelloSpeechlet implements Speechlet {
     {
         System.out.println("onSessionEnded requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+
     }
 }

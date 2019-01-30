@@ -1,2 +1,2 @@
-test/SayHelloRequestStreamHandler.class
 test/SayHelloSpeechlet.class
+test/SayHelloRequestStreamHandler.class
