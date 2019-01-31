@@ -1,23 +1,33 @@
 package test;
 
 import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.*;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 
+import java.util.Map;
+
 public class SayHelloSpeechlet implements Speechlet {
+    private GamePlayInfo game = new GamePlayInfo(1, 10);
+    private String CURRENT = "Current";
+    private String FINALSCORE = "Score";
+    private static final String LETTERS = "letters";
+    private int current = 0;
+    private int score = 0;
+    private int MAX_QUESTIONS= 4;
+
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
-            throws SpeechletException
-    {
+            throws SpeechletException {
         System.out.println("onLaunch requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
-        return getWelcomeResponse();
+
+        return getWelcomeResponse(session);
     }
 
     public SpeechletResponse onIntent(final IntentRequest request, final Session session)
-            throws SpeechletException
-    {
+            throws SpeechletException {
         System.out.println("onIntent requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
 
@@ -26,8 +36,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
         System.out.println("intentName : " + intentName);
 
-        if ("SayHelloIntent".equals(intentName)) {
-            return getHelloResponse();
+        if ("Answer".equals(intentName)) {
+            return gameMode(intent, session);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
@@ -38,17 +48,21 @@ public class SayHelloSpeechlet implements Speechlet {
     /**
      * Creates and returns a {@code SpeechletResponse} with a welcome message.
      *
-     * @return SpeechletResponse spoken and visual response for the given intent
+     * @return SpeechletResponse spoken and visual response for the given intent try get it to generate random quizzes rather than the user choosing next quiz
      */
-    private SpeechletResponse getWelcomeResponse()
-    {
-        String speechText = "Welcome to the Alexa World, you can say hello to me, I can respond." +
-                "Thanks, How to do in java user.";
+    private SpeechletResponse getWelcomeResponse(Session session) {
+        // setting up sample questions
+        game.setQuestions();
+        //setting up sessions
+        session.setAttribute(CURRENT, 0);
+        session.setAttribute(FINALSCORE, 0);
+        game.assignAnswers(0);
+        String speechText = game.getWelcomeMessage();
 
         // Create the Simple card content.
 
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -69,24 +83,41 @@ public class SayHelloSpeechlet implements Speechlet {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getHelloResponse()
-    {
-        String speechText = "Hello how to do in java user. It's a pleasure to talk with you. "
-                + "Currently I can only say simple things, "
-                + "but you can educate me to do more complicated tasks later. Happy to learn.";
-
+    // now task is to set up a game where max number is invovled
+    private SpeechletResponse gameMode(final Intent intent, final Session session) {
         // Create the Simple card content.
-
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
+        current = (int) session.getAttribute(CURRENT);
+        score = (int) session.getAttribute(FINALSCORE);
+        String speechText;
+        Map<String, Slot> slots = intent.getSlots();
+        Slot s = slots.get(LETTERS);
+        String user_input = s.getValue();
+//        speechText = String.valueOf(game.checkAnswer("A"));
+
+        if (game.checkAnswer(user_input)) {
+            speechText = "Well Done ";
+            score++;
+            session.setAttribute(FINALSCORE, score);
+            current++;
+            session.setAttribute(CURRENT, current);
+        } else {
+            speechText = game.output_wrong(game.getAnswer((Integer) session.getAttribute(CURRENT)));
+            current++;
+            session.setAttribute(CURRENT, current);
+        }
+        game.assignAnswers(current);
+        speechText += game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+
         card.setContent(speechText);
-
         // Create the plain text output.
-
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
-
-        return SpeechletResponse.newTellResponse(speech, card);
+//        SpeechletResponse.setNullableShouldEndSession(false);
+        Reprompt reprompt = new Reprompt();
+        reprompt.setOutputSpeech(speech);
+        return SpeechletResponse.newAskResponse(speech, reprompt, card);
     }
 
     /**
@@ -94,14 +125,13 @@ public class SayHelloSpeechlet implements Speechlet {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getHelpResponse()
-    {
+    private SpeechletResponse getHelpResponse() {
         String speechText = "Hello user, You can say hello to me!";
 
         // Create the Simple card content.
 
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Answer");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -118,16 +148,16 @@ public class SayHelloSpeechlet implements Speechlet {
     }
 
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
-            throws SpeechletException
-    {
+            throws SpeechletException {
         System.out.println("onSessionStarted requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+
     }
 
     public void onSessionEnded(final SessionEndedRequest request, final Session session)
-            throws SpeechletException
-    {
+            throws SpeechletException {
         System.out.println("onSessionEnded requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+
     }
 }
