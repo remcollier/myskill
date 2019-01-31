@@ -1,2 +1,4 @@
 test/SayHelloSpeechlet.class
+test/Question.class
+test/GamePlayInfo.class
 test/SayHelloRequestStreamHandler.class
