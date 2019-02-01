@@ -16,7 +16,8 @@ public class SayHelloSpeechlet implements Speechlet {
     private static final String LETTERS = "letters";
     private int current = 0;
     private int score = 0;
-    private int MAX_QUESTIONS= 4;
+    private int MAX_QUESTIONS = 4;
+    private static String REPLIES[] = {" You scored, Quiz Finnished would you like to play again or end game"};
 
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
@@ -63,19 +64,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
         SimpleCard card = new SimpleCard();
         card.setTitle("Answer");
-        card.setContent(speechText);
+        return createResponse(card, speechText);
 
-        // Create the plain text output.
-
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(speechText);
-
-        // Create reprompt
-
-        Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
-
-        return SpeechletResponse.newAskResponse(speech, reprompt, card);
     }
 
     /**
@@ -102,14 +92,34 @@ public class SayHelloSpeechlet implements Speechlet {
             session.setAttribute(FINALSCORE, score);
             current++;
             session.setAttribute(CURRENT, current);
+            speechText += checkReachedEnd(session);
+            
         } else {
             speechText = game.output_wrong(game.getAnswer((Integer) session.getAttribute(CURRENT)));
             current++;
             session.setAttribute(CURRENT, current);
+            speechText += checkReachedEnd(session);
         }
-        game.assignAnswers(current);
-        speechText += game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
+
+        return createResponse(card, speechText);
+
+
+    }
+
+    public String checkReachedEnd(Session session) {
+
+        if ((Integer) session.getAttribute(CURRENT) < MAX_QUESTIONS) {
+            game.assignAnswers(current);
+            return game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+
+        } else {
+            return REPLIES[0];
+
+        }
+    }
+
+    public SpeechletResponse createResponse(SimpleCard card, String speechText) {
         card.setContent(speechText);
         // Create the plain text output.
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
@@ -119,6 +129,7 @@ public class SayHelloSpeechlet implements Speechlet {
         reprompt.setOutputSpeech(speech);
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
     }
+
 
     /**
      * Creates a {@code SpeechletResponse} for the help intent.
@@ -132,19 +143,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
         SimpleCard card = new SimpleCard();
         card.setTitle("Answer");
-        card.setContent(speechText);
 
-        // Create the plain text output.
-
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(speechText);
-
-        // Create reprompt
-
-        Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
-
-        return SpeechletResponse.newAskResponse(speech, reprompt, card);
+        return createResponse(card, speechText);
     }
 
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
