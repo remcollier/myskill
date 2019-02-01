@@ -10,6 +10,7 @@ import com.amazon.speech.ui.SimpleCard;
 import java.util.Map;
 
 public class SayHelloSpeechlet implements Speechlet {
+    private static final String DECISION = "QuizDecision";
     private GamePlayInfo game = new GamePlayInfo(1, 10);
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
@@ -17,7 +18,7 @@ public class SayHelloSpeechlet implements Speechlet {
     private int current = 0;
     private int score = 0;
     private int MAX_QUESTIONS = 4;
-    private static String REPLIES[] = {" You scored, Quiz Finnished would you like to play again or end game"};
+    private static String REPLIES[] = {" You have scored ", " out of ", " ...would you like to play again or end game"};
 
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
@@ -39,11 +40,43 @@ public class SayHelloSpeechlet implements Speechlet {
 
         if ("Answer".equals(intentName)) {
             return gameMode(intent, session);
+        } else if ("WhatQuiz".equals(intentName)) {
+            return startQuizGame(intent, session);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
             return getHelpResponse();
         }
+    }
+
+    private SpeechletResponse startQuizGame(Intent intent, Session session) {
+        Map<String, Slot> slots = intent.getSlots();
+        Slot s = slots.get(DECISION);
+        String speechText = " ";
+        if (current == 0) {
+            if (s.getValue().equalsIgnoreCase("Accept")) {
+                game.setQuestions();
+                //setting up sessions
+                session.setAttribute(CURRENT, 0);
+                session.setAttribute(FINALSCORE, 0);
+                game.assignAnswers(0);
+                speechText += game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)), (Integer) session.getAttribute(CURRENT));
+
+            } else if (s.getValue().equalsIgnoreCase("Deny")) {
+                //add random quiz selector here
+                speechText += " You have chosen a different Quiz, " + game.getWelcomeQuizMessage();
+
+            } else {
+
+                getWelcomeResponse(session);
+            }
+        } else {
+            getHelpResponse();
+        }
+
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Answer");
+        return createResponse(card, speechText);
     }
 
     /**
@@ -52,13 +85,13 @@ public class SayHelloSpeechlet implements Speechlet {
      * @return SpeechletResponse spoken and visual response for the given intent try get it to generate random quizzes rather than the user choosing next quiz
      */
     private SpeechletResponse getWelcomeResponse(Session session) {
-        // setting up sample questions
-        game.setQuestions();
-        //setting up sessions
-        session.setAttribute(CURRENT, 0);
-        session.setAttribute(FINALSCORE, 0);
-        game.assignAnswers(0);
-        String speechText = game.getWelcomeMessage();
+//        // setting up sample questions
+//        game.setQuestions();
+//        //setting up sessions
+//        session.setAttribute(CURRENT, 0);
+//        session.setAttribute(FINALSCORE, 0);
+//        game.assignAnswers(0);
+        String speechText = "Welcome to Abdul's Trivia game. A quiz will be chosen at random. " + game.getWelcomeQuizMessage();
 
         // Create the Simple card content.
 
@@ -80,25 +113,36 @@ public class SayHelloSpeechlet implements Speechlet {
         card.setTitle("Answer");
         current = (int) session.getAttribute(CURRENT);
         score = (int) session.getAttribute(FINALSCORE);
-        String speechText;
+        String speechText = " ";
         Map<String, Slot> slots = intent.getSlots();
-        Slot s = slots.get(LETTERS);
-        String user_input = s.getValue();
-//        speechText = String.valueOf(game.checkAnswer("A"));
+        if (intent.getSlot(LETTERS).getName().equalsIgnoreCase(LETTERS)) {
+            Slot s = slots.get(LETTERS);
+            if (!s.getValue().isEmpty() && (Integer) session.getAttribute(CURRENT) < MAX_QUESTIONS) {
+                String user_input = s.getValue();
+                if (game.checkAnswer(user_input)) {
+                    speechText = "Well Done ";
+                    score++;
+                    session.setAttribute(FINALSCORE, score);
+                    current++;
+                    session.setAttribute(CURRENT, current);
+                    speechText += checkReachedEnd(session);
 
-        if (game.checkAnswer(user_input)) {
-            speechText = "Well Done ";
-            score++;
-            session.setAttribute(FINALSCORE, score);
-            current++;
-            session.setAttribute(CURRENT, current);
-            speechText += checkReachedEnd(session);
-            
+                } else {
+                    speechText = game.output_wrong(game.getAnswer((Integer) session.getAttribute(CURRENT)));
+                    current++;
+                    session.setAttribute(CURRENT, current);
+                    speechText += checkReachedEnd(session);
+                }
+
+
+            } else {
+                speechText += "I do not understand what you are saying, Can you repeat that again Please";
+
+            }
+
+
         } else {
-            speechText = game.output_wrong(game.getAnswer((Integer) session.getAttribute(CURRENT)));
-            current++;
-            session.setAttribute(CURRENT, current);
-            speechText += checkReachedEnd(session);
+            speechText += "I do not understand what you are saying, Can you repeat that again Please";
         }
 
 
@@ -110,11 +154,11 @@ public class SayHelloSpeechlet implements Speechlet {
     public String checkReachedEnd(Session session) {
 
         if ((Integer) session.getAttribute(CURRENT) < MAX_QUESTIONS) {
-            game.assignAnswers(current);
-            return game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+            game.assignAnswers((Integer) session.getAttribute(CURRENT));
+            return game.output_question(game.getQuestion((Integer) session.getAttribute(CURRENT)), (Integer) session.getAttribute(CURRENT));
 
         } else {
-            return REPLIES[0];
+            return REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + REPLIES[2];
 
         }
     }
@@ -158,6 +202,8 @@ public class SayHelloSpeechlet implements Speechlet {
             throws SpeechletException {
         System.out.println("onSessionEnded requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+        current = 0;
+        score = 0;
 
     }
 }

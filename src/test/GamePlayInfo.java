@@ -1,6 +1,8 @@
 package test;
 
 
+import com.amazonaws.services.dynamodbv2.xspec.B;
+
 import java.util.*;
 
 public class GamePlayInfo {
@@ -37,9 +39,9 @@ public class GamePlayInfo {
 
     public void setQuestions() {
         Question h = new Question(1, "Who are you1", "abdul", "peter", "mike", "john");
-        Question i = new Question(1, "do you love me2", "yes", "maybe", "dont know", "not sure");
-        Question u = new Question(1, "Who are you3", "abdul", "peter", "mike", "john");
-        Question r = new Question(1, "do you love me4", "yes", "maybe", "dont know", "not sure");
+        Question i = new Question(2, "do you love me2", "yes", "maybe", "dont know", "not sure");
+        Question u = new Question(3, "Who are you3", "abdul", "peter", "mike", "john");
+        Question r = new Question(4, "do you love me4", "yes", "maybe", "dont know", "not sure");
         question.add(h);
         question.add(i);
         question.add(u);
@@ -57,9 +59,8 @@ public class GamePlayInfo {
         return question.get(current).getQuestion();
     }
 
-    public String getWelcomeMessage() {
-        String s = " Welcome to Abdul's Trivia game," + "The Quiz we will be playing is called  " + getQuizname() +
-                " The first question is " + getQuestion(0);
+    public String getWelcomeQuizMessage() {
+        String s = "The quiz chosen is called  " + getQuizname() + "..... say accept to to continue with this quiz or deny to be given another quiz!  ";
         return s;
     }
 
@@ -81,15 +82,10 @@ public class GamePlayInfo {
             array[randomPosition] = temp;
         }
         this.letter = array[0];
-        answers.put(question.get(current).getAnswer(), array[0]);
-        answers.put(question.get(current).getWronganswer1(), array[1]);
-        answers.put(question.get(current).getWronganswer2(), array[2]);
-        answers.put(question.get(current).getWronganswer3(), array[3]);
-//        System.out.println("Correct one " + this.letter);
-//        System.out.println(answers.get(question.get(current).getAnswer()));
-//        System.out.println(answers.get(question.get(current).getWronganswer1()));
-//        System.out.println(answers.get(question.get(current).getWronganswer2()));
-//        System.out.println(answers.get(question.get(current).getWronganswer3()));
+        answers.put(array[0], question.get(current).getAnswer());
+        answers.put(array[1], question.get(current).getWronganswer1());
+        answers.put(array[2], question.get(current).getWronganswer2());
+        answers.put(array[3], question.get(current).getWronganswer3());
 
     }
 
@@ -104,7 +100,7 @@ public class GamePlayInfo {
     }
 
 
-    public String output_question(String question) {
+    public String output_question(String question, int current) {
         String s = null;
 //change this so it is random
         int random = 1;
@@ -123,19 +119,12 @@ public class GamePlayInfo {
                 break;
         }
 
-        s += "Is it ?...." + "  ......A.   " + getKey(answers, "A") + " ........B.    " + getKey(answers, "B") + "  ........C.    " + getKey(answers, "C") + " or ..........D.    " + getKey(answers, "D");
+//        s += "Is it ?...." + "  ......A.   " + getKey(answers, this.question.get(current).getAnswer()) + " ........B.    " + getKey(answers, answers.get(this.question.get(current).getWronganswer1())) + "  ........C.    " + getKey(answers, answers.get(this.question.get(current).getWronganswer2())) + " or ..........D.    " + getKey(answers, answers.get(this.question.get(current).getWronganswer1()));
+        s += "Is it ?...." + "  ......A.   " + answers.get("A") + " ........B.    " + answers.get("B") + "  ........C.    " + answers.get("C") + " or ..........D.    " + answers.get("D");
 
         return s;
     }
 
-    public <K, V> K getKey(Map<K, V> map, V value) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
 
     public String output_wrong(String answer) {
         String s = null;
@@ -155,13 +144,15 @@ public class GamePlayInfo {
 
         return s;
     }
-
+//
 //    public static void main(String[] args) {
 //        GamePlayInfo t = new GamePlayInfo(1, 3);
 //        t.setQuestions();
-//        t.shuffledAnswers(1);
-//        System.out.println(t.output_question(t.getQuestion(1)));
-//        System.out.println(t.checkAnswer("B"));
+//        t.assignAnswers(0);
+//        System.out.println(t.output_question(t.getQuestion(0),0));
+////        System.out.println(t.checkAnswer("B"));
+//        t.assignAnswers(1);
+//        System.out.println(t.output_question(t.getQuestion(1),1));
 //
 //
 //    }
