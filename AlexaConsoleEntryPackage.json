@@ -1,0 +1,200 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "fyp",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "Repeat",
+          "slots": [],
+          "samples": [
+            "sorry",
+            "can you say that again",
+            "repeat please",
+            "repeat again",
+            "i didnt hear that",
+            "repeat that again",
+            "Can you repeat "
+          ]
+        },
+        {
+          "name": "Skip",
+          "slots": [],
+          "samples": [
+            "move on",
+            "next question",
+            "i dont know ",
+            "skip"
+          ]
+        },
+        {
+          "name": "End",
+          "slots": [],
+          "samples": [
+            "end quiz",
+            "end game",
+            "end this quiz",
+            "end",
+            "quit",
+            "finish please",
+            "end my game"
+          ]
+        },
+        {
+          "name": "Myscore",
+          "slots": [],
+          "samples": [
+            "how many correct ",
+            "score",
+            "how many do i have right",
+            "whats my score"
+          ]
+        },
+        {
+          "name": "StartAgain",
+          "slots": [],
+          "samples": [
+            "play again",
+            "play same quiz again",
+            "restart",
+            "restart quiz",
+            "can i start again",
+            "start again"
+          ]
+        },
+        {
+          "name": "Answer",
+          "slots": [
+            {
+              "name": "letters",
+              "type": "letters"
+            }
+          ],
+          "samples": [
+            "emmm {letters}",
+            "em {letters}",
+            "it is {letters} for sure",
+            "answer is {letters}",
+            "answer {letters}",
+            "The answer is  {letters}",
+            "{letters}",
+            "its {letters} ",
+            "it is {letters} "
+          ]
+        },
+        {
+          "name": "SelectQuiz",
+          "slots": [
+            {
+              "name": "QuizDecision",
+              "type": "QuizDecision"
+            }
+          ],
+          "samples": [
+            "i {QuizDecision} this quiz",
+            "I want {QuizDecision}",
+            "{QuizDecision} please",
+            "i {QuizDecision}",
+            "{QuizDecision}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "letters",
+          "values": [
+            {
+              "name": {
+                "value": "D",
+                "synonyms": [
+                  "D.",
+                  "Dee",
+                  "d.",
+                  "d",
+                  "D"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "C",
+                "synonyms": [
+                  "cee",
+                  "c",
+                  "c.",
+                  "C.",
+                  "C"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "B",
+                "synonyms": [
+                  "B.",
+                  "bee",
+                  "bb",
+                  "b",
+                  "b.",
+                  "B"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "A",
+                "synonyms": [
+                  "A.",
+                  "aa",
+                  "a",
+                  "a.",
+                  "A"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "QuizDecision",
+          "values": [
+            {
+              "name": {
+                "value": "Deny",
+                "synonyms": [
+                  "deny"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Accept",
+                "synonyms": [
+                  "accept"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

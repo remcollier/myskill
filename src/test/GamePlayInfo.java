@@ -1,55 +1,58 @@
 package test;
 
-
 import java.util.*;
 
 public class GamePlayInfo {
+    public GamePlayInfo(long quiz_id, int num) {
+        this.quiz_id = quiz_id;
+        this.num = num;
+    }
 
     private long quiz_id;
-
-
     private String quizname;
     private int num;
+    private int score;
+    private List<Question> question = new ArrayList<>();
+    private HashMap<String, String> answers = new HashMap<String, String>();
+    private String letter = null;
+    private Random r = new Random();
 
     public int getScore() {
         return score;
     }
 
+    //save to database
     public void setScore(int score) {
         this.score = score;
     }
 
-    private int score;
-    private List<Question> question = new ArrayList<>();
-    //    private Question question;
-    private HashMap<String, String> answers = new HashMap<String, String>();
-    private String letter = null;
+    public void setQuizname(String quizname) {
+        this.quizname = quizname;
+    }
 
-    public GamePlayInfo(long quiz_id, int num) {
-        this.quiz_id = quiz_id;
-        this.num = num;
+    public long getQuiz_id() {
+        return quiz_id;
     }
 
     public String getQuizname() {
         return quizname;
     }
 
-
+    //retrieve sql randomly
     public void setQuestions() {
-        Question h = new Question(1, "Who are you1", "abdul", "peter", "mike", "john");
-        Question i = new Question(1, "do you love me2", "yes", "maybe", "dont know", "not sure");
-        Question u = new Question(1, "Who are you3", "abdul", "peter", "mike", "john");
-        Question r = new Question(1, "do you love me4", "yes", "maybe", "dont know", "not sure");
-        question.add(h);
-        question.add(i);
-        question.add(u);
-        question.add(r);
-
+        Question sample1 = new Question(1, " Who won the World Cup last year? ", "France", "Germany", "Brazil", "Scotland");
+        Question sample2 = new Question(2, " Who won the golden boot in the World Cup? ", "Harry Kane", "Messi", "Pogba", "Ronaldo");
+        Question sample3 = new Question(3, " Who plays for Juventus at the moment? ", "Ronaldo", "Higuain", "Messi", "Surez");
+        Question sample4 = new Question(4, " What colour is the sea? ", "blue", "red", " purple", "white");
+        question.add(sample1);
+        question.add(sample2);
+        question.add(sample3);
+        question.add(sample4);
     }
 
     //use this to get  questions from database
     public List<Question> getRandomQuestions() {
-//get sql query to get the quiz
+        //get sql query to get the quiz
         return question;
     }
 
@@ -57,16 +60,13 @@ public class GamePlayInfo {
         return question.get(current).getQuestion();
     }
 
-    public String getWelcomeMessage() {
-        String s = " Welcome to Abdul's Trivia game," + "The Quiz we will be playing is called  " + getQuizname() +
-                " The first question is " + getQuestion(0);
+    public String getWelcomeQuizMessage() {
+        String s = "The quiz chosen is called  " + getQuizname() + "..... say accept to to continue with this quiz or deny to be given another quiz!  ";
         return s;
     }
 
     public String getAnswer(int current) {
         return question.get(current).getAnswer();
-
-
     }
 
     public void assignAnswers(int current) {
@@ -81,87 +81,110 @@ public class GamePlayInfo {
             array[randomPosition] = temp;
         }
         this.letter = array[0];
-        answers.put(question.get(current).getAnswer(), array[0]);
-        answers.put(question.get(current).getWronganswer1(), array[1]);
-        answers.put(question.get(current).getWronganswer2(), array[2]);
-        answers.put(question.get(current).getWronganswer3(), array[3]);
-//        System.out.println("Correct one " + this.letter);
-//        System.out.println(answers.get(question.get(current).getAnswer()));
-//        System.out.println(answers.get(question.get(current).getWronganswer1()));
-//        System.out.println(answers.get(question.get(current).getWronganswer2()));
-//        System.out.println(answers.get(question.get(current).getWronganswer3()));
+        answers.put(array[0], question.get(current).getAnswer());
+        answers.put(array[1], question.get(current).getWronganswer1());
+        answers.put(array[2], question.get(current).getWronganswer2());
+        answers.put(array[3], question.get(current).getWronganswer3());
 
     }
 
-    //needs to check for A. a.*********
+    //double check this
     public boolean checkAnswer(String letter) {
         boolean check = false;
-        if (this.letter.equalsIgnoreCase(letter)) {
+        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
             check = true;
         }
-
         return check;
     }
 
-
-    public String output_question(String question) {
-        String s = null;
-//change this so it is random
-        int random = 1;
+    public String outputQuestion(String question) {
+        String string = " ";
+        int low = 1;
+        int high = 4;
+        int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                s = "The next question is " + question + ".... ";
+                string = " The next question is " + question + ".... ";
                 break;
             case 2:
-                s = "The following question is +" + question + "...... ";
+                string = " The following question is " + question + "...... ";
                 break;
             case 3:
-                s = "On to the next question  " + question + "..... ";
+                string = " On to the next question  " + question + "..... ";
                 break;
             case 4:
-                s = question;
+                string = question;
                 break;
         }
-
-        s += "Is it ?...." + "  ......A.   " + getKey(answers, "A") + " ........B.    " + getKey(answers, "B") + "  ........C.    " + getKey(answers, "C") + " or ..........D.    " + getKey(answers, "D");
-
-        return s;
+        string += " Is it ?...." + "  ......A.   " + answers.get("A") + " ........B.    " + answers.get("B") + "  ........C.    " + answers.get("C") + " or ..........D.    " + answers.get("D");
+        return string;
     }
 
-    public <K, V> K getKey(Map<K, V> map, V value) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            if (entry.getValue().equals(value)) {
-                return entry.getKey();
-            }
-        }
-        return null;
+
+    public String questionSingleOutput(String question) {
+        String string = " ";
+        string += question + "  Is it ?...." + "  ......A.   " + answers.get("A") + " ........B.    " + answers.get("B") + "  ........C.    " + answers.get("C") + " or ..........D.    " + answers.get("D");
+        return string;
     }
 
-    public String output_wrong(String answer) {
-        String s = null;
-//change this so it is random
-        int random = 1;
+    public String getCongrats() {
+
+        String string = " ";
+        int low = 1;
+        int high = 6;
+        int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                s = "..... Unlucky!!!  The answer was..... " + letter + ".....   " + answer + ". ";
+                string = "..... Fantastic!!! Well done.... ";
                 break;
             case 2:
-                s = "..... Hard luck ! The answer was..... " + letter + "....   " + answer + " . ";
+                string = "..... You are correct ! You are smart after all..... ";
                 break;
             case 3:
-                s = "..... Better luck next time!..... " + letter + " ....  " + answer + " was the answer.  ";
+                string = "..... Hmmmm..... That is correct did you cheat ... ? ";
+                break;
+            case 4:
+                string = "..... Good answer, You are Correct ";
+                break;
+            case 5:
+                string = ".....Well done that is correct ";
+                break;
+            case 6:
+                string = ".....Great Job... ? ";
                 break;
         }
 
-        return s;
+        return string;
     }
 
+    public String outputIncorrectAnswer(String answer) {
+        String string = " ";
+        int low = 1;
+        int high = 3;
+        int random = r.nextInt(high - low) + low;
+        switch (random) {
+            case 1:
+                string = "..... Unlucky!!!  The answer was..... " + letter + ".....   " + answer + ". ";
+                break;
+            case 2:
+                string = "..... Hard luck ! The answer was..... " + letter + "....   " + answer + " . ";
+                break;
+            case 3:
+                string = "..... Better luck next time!..... " + letter + " ....  " + answer + " was the answer.  ";
+                break;
+        }
+
+        return string;
+    }
+//
 //    public static void main(String[] args) {
 //        GamePlayInfo t = new GamePlayInfo(1, 3);
 //        t.setQuestions();
-//        t.shuffledAnswers(1);
-//        System.out.println(t.output_question(t.getQuestion(1)));
-//        System.out.println(t.checkAnswer("B"));
+//        t.assignAnswers(0);
+//        System.out.println(t.output_question(t.getQuestion(0),0));
+////        System.out.println(t.checkAnswer("B"));
+//        t.assignAnswers(1);
+//        System.out.println(t.output_question(t.getQuestion(1),1));
 //
 //
 //    }
