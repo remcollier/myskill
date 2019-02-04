@@ -61,7 +61,7 @@ public class GamePlayInfo {
     }
 
     public String getWelcomeQuizMessage() {
-        String s = "The quiz chosen is called  " + getQuizname() + "..... say accept to to continue with this quiz or deny to be given another quiz!  ";
+        String s = "<p> The quiz chosen is called  " + getQuizname() + ".</p> "+  "<break time=\"0.3s\" /> "+" Accept to continue with this quiz" +  "<break time=\"0.5s\" /> "+"or deny to be given another quiz!  ";
         return s;
     }
 
@@ -104,26 +104,26 @@ public class GamePlayInfo {
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = " The next question is " + question + ".... ";
+                string = " <p>The next question is</p> " + question + ".... ";
                 break;
             case 2:
-                string = " The following question is " + question + "...... ";
+                string = " <p>The following question is</p> " + question + "...... ";
                 break;
             case 3:
-                string = " On to the next question  " + question + "..... ";
+                string = "<p> On to the next question </p> " + question + "..... ";
                 break;
             case 4:
                 string = question;
                 break;
         }
-        string += " Is it ?...." + "  ......A.   " + answers.get("A") + " ........B.    " + answers.get("B") + "  ........C.    " + answers.get("C") + " or ..........D.    " + answers.get("D");
+        string += " <p> Is it ? </p>"+  "<break time=\"0.5s\" /> "+" <p> <say-as interpret-as=\"characters\">A</say-as> </p>"  + answers.get("A") + "<p> <say-as interpret-as=\"characters\">B</say-as> </p>"  + answers.get("B") +  "<p> <say-as interpret-as=\"characters\">C</say-as> </p>"  + answers.get("C")  + " <p> or <say-as interpret-as=\"characters\">D</say-as> </p>" + answers.get("D");
         return string;
     }
 
 
     public String questionSingleOutput(String question) {
         String string = " ";
-        string += question + "  Is it ?...." + "  ......A.   " + answers.get("A") + " ........B.    " + answers.get("B") + "  ........C.    " + answers.get("C") + " or ..........D.    " + answers.get("D");
+        string += question + " <p> Is it ? </p>"+  "<break time=\"0.5s\" /> "+" <p> <say-as interpret-as=\"characters\">A</say-as> </p>"  + answers.get("A") + "<p> <say-as interpret-as=\"characters\">B</say-as> </p>"   + answers.get("B") +  "<p> <say-as interpret-as=\"characters\">C</say-as> </p>"  + answers.get("C")  + " <p> or <say-as interpret-as=\"characters\">D</say-as> </p>" + answers.get("D");
         return string;
     }
 
@@ -135,22 +135,22 @@ public class GamePlayInfo {
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = "..... Fantastic!!! Well done.... ";
+                string = " <p><prosody volume=\"x-loud\"> Fantastic </prosody> Well done</p>";
                 break;
             case 2:
-                string = "..... You are correct ! You are smart after all..... ";
+                string = " <p> You are correct ! You are smart after all</p> ";
                 break;
             case 3:
-                string = "..... Hmmmm..... That is correct did you cheat ... ? ";
+                string = " <p>  <prosody volume=\"x-loud\">Hmmmm </prosody> </p> That is correct did you cheat ... ? ";
                 break;
             case 4:
-                string = "..... Good answer, You are Correct ";
+                string = " <p> Good answer, You are Correct </p> ";
                 break;
             case 5:
-                string = ".....Well done that is correct ";
+                string = "<p> Well done that is correct </p> ";
                 break;
             case 6:
-                string = ".....Great Job... ? ";
+                string = "<p> Great Job </p> ";
                 break;
         }
 
@@ -164,13 +164,13 @@ public class GamePlayInfo {
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = "..... Unlucky!!!  The answer was..... " + letter + ".....   " + answer + ". ";
+                string = " <p> Unlucky!!! </p>   The answer was "+ "<break time=\"0.5s\" /> " + letter +  "<break time=\"0.3s\" /> " + answer + ". ";
                 break;
             case 2:
-                string = "..... Hard luck ! The answer was..... " + letter + "....   " + answer + " . ";
+                string = "<p> Hard luck ! The answer was</p> " + "<break time=\"0.5s\" /> "+ letter +  "<break time=\"0.3s\" /> " + answer + " . ";
                 break;
             case 3:
-                string = "..... Better luck next time!..... " + letter + " ....  " + answer + " was the answer.  ";
+                string = "<p> Better luck next time!</p> " + "<break time=\"0.5s\" /> "+ letter +  "<break time=\"0.3s\" /> "+ answer + " was the answer.  ";
                 break;
         }
 
