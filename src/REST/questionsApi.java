@@ -1,13 +1,16 @@
 package REST;
 
 import Models.Question;
+import REST.WebREST.RequestObject;
+import REST.WebREST.WebResponse;
+import REST.WebREST.WebUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class quizApi {
+public class questionsApi {
 
     private List<Question> list;
     private ObjectMapper mapper = new ObjectMapper();
@@ -35,9 +38,9 @@ public class quizApi {
 
 
     public static void main(String[] args) throws IOException {
-        quizApi q = new quizApi();
+        questionsApi q = new questionsApi();
         List<Question> l = q.getQuizQuestions(Long.valueOf(6));
-//        System.out.println(l.get(0).getRight());
+        System.out.println(l.get(0).getRight());
     }
 
 
