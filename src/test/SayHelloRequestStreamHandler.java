@@ -1,5 +1,6 @@
 package test;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class SayHelloRequestStreamHandler extends SpeechletRequestStreamHandler 
         System.out.println("Supported app ids : " + supportedApplicationIds);
     }
 
-    public SayHelloRequestStreamHandler() {
+    public SayHelloRequestStreamHandler() throws IOException {
         super(new test.SayHelloSpeechlet(), supportedApplicationIds);
     }
 

@@ -1,22 +1,29 @@
 package test;
 
+import Game.GamePlayInfo;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.*;
 import com.amazon.speech.ui.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class SayHelloSpeechlet implements Speechlet {
+    private GamePlayInfo game = new GamePlayInfo();
     private static final String DECISION = "QuizDecision";
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
     private static final String LETTERS = "letters";
     private int current = 0;
     private int score = 0;
-    private int MAX_QUESTIONS = 4;
+    private int MAX_QUESTIONS = game.getNumofQuestions();
     private static String REPLIES[] = {" You have scored ", " out of ", " ...would you like to play again or end game?"};
-    private GamePlayInfo game = new GamePlayInfo(1, MAX_QUESTIONS);
+
+    public SayHelloSpeechlet() throws IOException {
+
+    }
+
 
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
@@ -37,11 +44,19 @@ public class SayHelloSpeechlet implements Speechlet {
         System.out.println("intentName : " + intentName);
 
         if ("SelectQuiz".equals(intentName)) {
-            return startQuizGame(intent, session);
+            try {
+                return startQuizGame(intent, session);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if ("Answer".equals(intentName)) {
             return gameMode(intent, session);
         } else if ("StartAgain".equals(intentName)) {
-            return startAgain(intent, session);
+            try {
+                return startAgain(intent, session);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else if ("End".equals(intentName)) {
             return endQuiz(intent, session);
         } else if ("Repeat".equals(intentName)) {
@@ -53,6 +68,8 @@ public class SayHelloSpeechlet implements Speechlet {
         } else {
             return getHelpResponse();
         }
+        return getHelpResponse();
+
     }
 
     private SpeechletResponse getMyScore(Intent intent, Session session) {
@@ -67,7 +84,7 @@ public class SayHelloSpeechlet implements Speechlet {
         card.setTitle(intent.getName());
         current++;
         session.setAttribute(CURRENT, current);
-        String speechText = " <p> You have skipped this question. </p> " + "<break time=\"0.8s\" /> "+ checkReachedEnd(session);
+        String speechText = " <p> You have skipped this question. </p> " + "<break time=\"0.8s\" /> " + checkReachedEnd(session);
         card.setContent(speechText);
 
         return createResponse(speechText);
@@ -86,12 +103,12 @@ public class SayHelloSpeechlet implements Speechlet {
         session.setAttribute(CURRENT, MAX_QUESTIONS);
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
-        String speechText = " You have ended the quiz "+ "<break time=\"0.3s\" /> " + REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + ", Would you like to play this quiz again, play a different quiz or quit" +   "<break time=\"0.5s\" /> ";
+        String speechText = " You have ended the quiz " + "<break time=\"0.3s\" /> " + REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + ", Would you like to play this quiz again, play a different quiz or quit" + "<break time=\"0.5s\" /> ";
         card.setContent(speechText);
         return createResponse(speechText);
     }
 
-    private SpeechletResponse startAgain(Intent intent, Session session) {
+    private SpeechletResponse startAgain(Intent intent, Session session) throws IOException {
         game.setQuestions();
         session.setAttribute(CURRENT, 0);
         session.setAttribute(FINALSCORE, 0);
@@ -100,14 +117,14 @@ public class SayHelloSpeechlet implements Speechlet {
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
         game.assignAnswers(current);
-        String speechText = "You have started again, "+  "<break time=\"0.7s\" /> " + game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+        String speechText = "You have started again, " + "<break time=\"0.7s\" /> " + game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
         card.setContent(speechText);
 
         return createResponse(speechText);
     }
 
     //decided if quiz is right if not move to next
-    private SpeechletResponse startQuizGame(Intent intent, Session session) {
+    private SpeechletResponse startQuizGame(Intent intent, Session session) throws IOException {
         Map<String, Slot> slots = intent.getSlots();
         Slot s = slots.get(DECISION);
         String speechText = " ";
@@ -122,7 +139,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
             } else if (s.getValue().equalsIgnoreCase("Deny")) {
                 //add random quiz selector here
-                speechText += " You have chosen a different Quiz,  "+ "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
+                game.chooseQuiz();
+                speechText += " You have chosen a different Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
 
             } else {
 
@@ -146,8 +164,8 @@ public class SayHelloSpeechlet implements Speechlet {
      */
     private SpeechletResponse getWelcomeResponse() {
 //        // setting up sample questions
-        game.setQuizname("football");
-        String speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>"+  "<break time=\"0.3s\" /> "+ " <p> To answer a question select one of the letters. </p> Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
+//        game.setQuizname("football");
+        String speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + " <p> To answer a question select one of the letters. </p> Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Welcome");
@@ -169,7 +187,7 @@ public class SayHelloSpeechlet implements Speechlet {
         String speechText = " ";
 
 
-        if (game.getRandomQuestions().isEmpty()) {
+        if (game.getQuestions().isEmpty()) {
             return getWelcomeResponse();
         } else {
             current = (int) session.getAttribute(CURRENT);
