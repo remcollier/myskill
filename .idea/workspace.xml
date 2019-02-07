@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Game/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/questionsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/questionsApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/quizApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/quizApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Game/GamePlayInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game/GamePlayInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/REST/quizApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/REST/quizApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/SayHelloSpeechlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/SayHelloSpeechlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" afterDir="false" />
-    </list>
+    <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/REST/questionsApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
+            <state relative-caret-position="66">
               <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -60,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+            <state relative-caret-position="143">
+              <caret line="137" column="52" lean-forward="true" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -179,7 +165,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549565852680" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549565863618" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -347,12 +333,12 @@
       <workItem from="1549458327968" duration="23000" />
       <workItem from="1549458381981" duration="15444000" />
       <workItem from="1549494756633" duration="182000" />
-      <workItem from="1549534996894" duration="6418000" />
+      <workItem from="1549534996894" duration="7188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89375000" />
+    <option name="totallyTimeSpent" value="90145000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -545,20 +531,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
+    <entry file="file://$PROJECT_DIR$/src/REST/questionsApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+        <state relative-caret-position="66">
+          <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/REST/questionsApi.java">
+    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+        <state relative-caret-position="143">
+          <caret line="137" column="52" lean-forward="true" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
