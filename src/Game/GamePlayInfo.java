@@ -10,15 +10,6 @@ import java.util.*;
 
 public class GamePlayInfo {
 
-    public GamePlayInfo() throws IOException {
-        this.allquizzes = quizzies.getQuizzies();
-        this.numOfQuiz = allquizzes.size();
-        this.setShuffledQuizzies();
-        this.chooseQuiz();
-//        System.out.println("number of quizzes: " + numOfQuiz);
-
-    }
-
     private int numOfQuiz;
     private List<Question> allquestions = new ArrayList<>();
     private List<Quiz> allquizzes = new ArrayList<>();
@@ -30,6 +21,15 @@ public class GamePlayInfo {
     private Quiz chosenQuiz = new Quiz();
     private int currentQuiz = 0;
     private Long quizId;
+
+    public GamePlayInfo() throws IOException {
+        this.allquizzes = quizzies.getQuizzies();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
 
     public int getNumofQuestions() {
         return allquestions.size();
@@ -44,7 +44,7 @@ public class GamePlayInfo {
             chosenQuiz = allquizzes.get(currentQuiz);
             this.quizId = chosenQuiz.getId();
             this.currentQuiz++;
-//            System.out.println("chosen quiz: " + chosenQuiz.getTitle());
+            System.out.println("chosen quiz: " + chosenQuiz.getTitle());
 
         }
 
@@ -53,7 +53,7 @@ public class GamePlayInfo {
 
     public void setShuffledQuizzies() {
         Collections.shuffle(this.allquizzes);
-//        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
+        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
 
 
     }
@@ -64,9 +64,9 @@ public class GamePlayInfo {
 
 
     public void setQuestions() throws IOException {
-        System.out.println("Quiz id"+quizId);
+        System.out.println("Quiz id" + quizId);
         allquestions = questions.getQuizQuestions(Long.valueOf(quizId));
-//        System.out.println(allquestions.get(0).getQuestion());
+        System.out.println(allquestions.get(0).getQuestion());
 //        System.out.println(allquestions.get(1).getQuestion());
 
     }
@@ -81,7 +81,7 @@ public class GamePlayInfo {
 
     public String getWelcomeQuizMessage() {
         String s = "<p> The quiz chosen is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + " Accept to continue with this quiz" + "<break time=\"0.5s\" /> " + "or deny to be given another quiz!  ";
-//        System.out.println(s);
+        System.out.println(s);
         return s;
     }
 
@@ -200,21 +200,6 @@ public class GamePlayInfo {
 
         return string;
     }
-
-
-//    public static void main(String[] args) throws IOException {
-//        int current = 0;
-//        GamePlayInfo t = new GamePlayInfo();
-//        t.chooseQuiz();
-//        t.setQuestions();
-//        t.getWelcomeQuizMessage();
-//        t.assignAnswers(current);
-//        t.outputQuestion(t.getQuestion(current));
-////        System.out.println(t.checkAnswer("B"));
-////        t.assignAnswers(1);
-//
-//
-//    }
 
 
 }

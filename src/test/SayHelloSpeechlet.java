@@ -17,7 +17,7 @@ public class SayHelloSpeechlet implements Speechlet {
     private static final String LETTERS = "letters";
     private int current = 0;
     private int score = 0;
-    private int MAX_QUESTIONS = game.getNumofQuestions();
+    private int MAX_QUESTIONS = 0;
     private static String REPLIES[] = {" You have scored ", " out of ", " ...would you like to play again or end game?"};
 
     public SayHelloSpeechlet() throws IOException {
@@ -99,6 +99,7 @@ public class SayHelloSpeechlet implements Speechlet {
         return createResponse(speechText);
     }
 
+    //need to add intent where player chooses a different quiz
     private SpeechletResponse endQuiz(Intent intent, Session session) {
         session.setAttribute(CURRENT, MAX_QUESTIONS);
         SimpleCard card = new SimpleCard();
@@ -123,7 +124,6 @@ public class SayHelloSpeechlet implements Speechlet {
         return createResponse(speechText);
     }
 
-    //decided if quiz is right if not move to next
     private SpeechletResponse startQuizGame(Intent intent, Session session) throws IOException {
         Map<String, Slot> slots = intent.getSlots();
         Slot s = slots.get(DECISION);
@@ -132,6 +132,7 @@ public class SayHelloSpeechlet implements Speechlet {
             if (s.getValue().equalsIgnoreCase("Accept")) {
                 game.setQuestions();
                 //setting up sessions
+                MAX_QUESTIONS = game.getNumofQuestions();
                 session.setAttribute(CURRENT, 0);
                 session.setAttribute(FINALSCORE, 0);
                 game.assignAnswers(0);
@@ -140,6 +141,7 @@ public class SayHelloSpeechlet implements Speechlet {
             } else if (s.getValue().equalsIgnoreCase("Deny")) {
                 //add random quiz selector here
                 game.chooseQuiz();
+                MAX_QUESTIONS = game.getNumofQuestions();
                 speechText += " You have chosen a different Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
 
             } else {
@@ -212,16 +214,13 @@ public class SayHelloSpeechlet implements Speechlet {
                     }
 
                 } else {
-                    speechText += "I do not understand what you are saying, Can you repeat that again Please";
+                    speechText += "I do not understand what you are saying, Can you repeat that again Please1";
                 }
 
             } else {
-                speechText += "I do not understand what you are saying, Can you repeat that again Please";
+                speechText += "I do not understand what you are saying, Can you repeat that again Please2";
             }
         }
-//        SsmlOutputSpeech outputSpeech = new SsmlOutputSpeech();
-//        outputSpeech.setSsml("<speak>" + speechText + "</speak>");
-
         card.setContent(speechText);
         return createResponse(speechText);
     }
