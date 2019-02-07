@@ -133,10 +133,11 @@ public class SayHelloSpeechlet implements Speechlet {
                 game.setQuestions();
                 //setting up sessions
                 MAX_QUESTIONS = game.getNumofQuestions();
+
                 session.setAttribute(CURRENT, 0);
                 session.setAttribute(FINALSCORE, 0);
                 game.assignAnswers(0);
-                speechText += game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+                speechText +=" Wise Choice " + "<break time=\"0.3s\" /> "+" before we begin there are  "+ MAX_QUESTIONS+ "questions in total "+"<break time=\"0.6s\" /> " + game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
             } else if (s.getValue().equalsIgnoreCase("Deny")) {
                 //add random quiz selector here
