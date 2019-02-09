@@ -37,9 +37,10 @@ public class GamePlayInfo {
 
     public void chooseQuiz() {
 
-        if (numOfQuiz < currentQuiz) {
-            setShuffledQuizzies();
+        if (numOfQuiz <= currentQuiz) {
+            this.setShuffledQuizzies();
             currentQuiz = 0;
+            return;
         } else {
             chosenQuiz = allquizzes.get(currentQuiz);
             this.quizId = chosenQuiz.getId();
@@ -53,12 +54,12 @@ public class GamePlayInfo {
 
     public void setShuffledQuizzies() {
         Collections.shuffle(this.allquizzes);
-        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
+//        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
 
 
     }
 
-    public List<Quiz> allSQuizzies() {
+    public List<Quiz> allQuizzies() {
         return allquizzes;
     }
 
@@ -67,7 +68,6 @@ public class GamePlayInfo {
         System.out.println("Quiz id" + quizId);
         allquestions = questions.getQuizQuestions(Long.valueOf(quizId));
         System.out.println(allquestions.get(0).getQuestion());
-//        System.out.println(allquestions.get(1).getQuestion());
 
     }
 
@@ -105,11 +105,6 @@ public class GamePlayInfo {
         answers.put(array[1], allquestions.get(current).getWrong1());
         answers.put(array[2], allquestions.get(current).getWrong2());
         answers.put(array[3], allquestions.get(current).getWrong3());
-//        System.out.println(answers.get("A"));
-//        System.out.println(answers.get("B"));
-//        System.out.println(answers.get("C"));
-//        System.out.println(answers.get("D"));
-
     }
 
     public boolean checkAnswer(String letter) {
@@ -140,7 +135,6 @@ public class GamePlayInfo {
                 break;
         }
         string += " <p> Is it ? </p>" + "<break time=\"0.5s\" /> " + " <p> <say-as interpret-as=\"characters\">A</say-as> </p>" + answers.get("A") + "<p> <say-as interpret-as=\"characters\">B</say-as> </p>" + answers.get("B") + "<p> <say-as interpret-as=\"characters\">C</say-as> </p>" + answers.get("C") + " <p> or <say-as interpret-as=\"characters\">D</say-as> </p>" + answers.get("D");
-//        System.out.println(string);
         return string;
     }
 
