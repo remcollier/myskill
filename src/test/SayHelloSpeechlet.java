@@ -314,7 +314,7 @@ public class SayHelloSpeechlet implements Speechlet {
      */
     private SpeechletResponse getHelpResponse() {
         String speechText;
-        speechText = "<p>Hello user, I did not understand what you meant!</p>  <p>You can accept or deny the quiz you have choosen. You can also ask me to repeat the question, skip the question, end quiz, check score, start again or play a different quiz. Dont forget you can also add quizzes and question using my website</p>";
+        speechText = "<p>Hello user, I did not understand what you meant!</p>  <p>You can accept or deny the quiz you have been given. You can also ask me to repeat the question, skip the question, end quiz, check score, start again or play a different quiz. Dont forget you can also add quizzes and question using my website</p>";
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Help");

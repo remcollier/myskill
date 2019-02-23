@@ -17,8 +17,9 @@ public class quizApi {
     public String getApiQuizzes() {
         RequestObject obj = new RequestObject();
         obj.method = "GET";
-        obj.url = "http://alexa-cs.ucd.ie:8080/api/allquizzes";
-//        obj.url = "http://localhost:80/api/allquizzes";
+//        obj.url = "http://alexa-cs.ucd.ie:8080/api/allquizzes";
+        obj.url = "http://localhost:80/api/allquizzes";
+
         WebResponse rest = WebUtils.sendRequest(obj);
         return rest.getContent();
     }
