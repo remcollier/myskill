@@ -1,9 +1,9 @@
 package REST;
 
 import Models.Quiz;
-import REST.WebREST.RequestObject;
-import REST.WebREST.WebResponse;
-import REST.WebREST.WebUtils;
+import REST.Utils.RequestObject;
+import REST.Utils.WebResponse;
+import REST.Utils.WebUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ public class quizApi {
     public String getApiQuizzes() {
         RequestObject obj = new RequestObject();
         obj.method = "GET";
-//        obj.url = "http://alexa-cs.ucd.ie:8080/api/allquizzes";
-        obj.url = "http://localhost:80/api/allquizzes";
-
+        obj.type = "text/html";
+        obj.url = "http://alexa-cs.ucd.ie:8080/api/allquizzes";
+//        obj.url = "http://localhost:80/api/allquizzes";
         WebResponse rest = WebUtils.sendRequest(obj);
         return rest.getContent();
     }

@@ -1,9 +1,9 @@
 package REST;
 
 import Models.Question;
-import REST.WebREST.RequestObject;
-import REST.WebREST.WebResponse;
-import REST.WebREST.WebUtils;
+import REST.Utils.RequestObject;
+import REST.Utils.WebResponse;
+import REST.Utils.WebUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -19,8 +19,10 @@ public class questionsApi {
     public String getApiQuestions(Long id) {
         RequestObject obj = new RequestObject();
         obj.method = "GET";
-//        obj.url = "http://alexa-cs.ucd.ie:8080/api/quiz/" + id;
-        obj.url = "http://localhost:80/api/quiz/" + id;
+        obj.type = "text/html";
+
+        obj.url = "http://alexa-cs.ucd.ie:8080/api/quiz/" + id;
+//        obj.url = "http://localhost:80/api/quiz/" + id;
         WebResponse rest = WebUtils.sendRequest(obj);
 
 //        WebUtils.sendRequest()
@@ -39,11 +41,11 @@ public class questionsApi {
     }
 
 
-    public static void main(String[] args) throws IOException {
-        questionsApi q = new questionsApi();
-        List<Question> l = q.getQuizQuestions(Long.valueOf(6));
-        System.out.println(l.get(0).getRight());
-    }
+//    public static void main(String[] args) throws IOException {
+//        questionsApi q = new questionsApi();
+//        List<Question> l = q.getQuizQuestions(Long.valueOf(1));
+//        System.out.println(l.get(0).getRight());
+//    }
 
 
 }

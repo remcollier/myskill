@@ -14,8 +14,8 @@ public class SayHelloSpeechlet implements Speechlet {
     private static final String DECISION = "QuizDecision";
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
-    private String User = "User";
-
+    //    private String User = "User";
+    private String userID;
     private static final String LETTERS = "letters";
     private int current = 0;
     private int score = 0;
@@ -41,7 +41,7 @@ public class SayHelloSpeechlet implements Speechlet {
         System.out.println("onLaunch requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
 
-        session.setAttribute(User, session.getUser().getUserId());
+//        session.setAttribute(User, session.getUser().getUserId());
         return getWelcomeResponse();
     }
 
@@ -68,6 +68,8 @@ public class SayHelloSpeechlet implements Speechlet {
             }
         } else if ("End".equals(intentName)) {
             return endQuiz(intent, session);
+        } else if ("Token".equals(intentName)) {
+            return getToken(intent, session);
         } else if ("Repeat".equals(intentName)) {
             return repeatQuestion(intent, session);
         } else if ("Skip".equals(intentName)) {
@@ -81,6 +83,15 @@ public class SayHelloSpeechlet implements Speechlet {
         }
 
         return getHelpResponse();
+    }
+
+    private SpeechletResponse getToken(Intent intent, Session session) {
+        String speechText = " ";
+        userID = session.getUser().getUserId();
+        String token = game.getToken(userID);
+        speechText += token;
+        return createResponse(speechText);
+
     }
 
     private SpeechletResponse playNextQuiz(Intent intent, Session session) {
@@ -132,6 +143,8 @@ public class SayHelloSpeechlet implements Speechlet {
 
     //need to add intent where player chooses a different quiz
     private SpeechletResponse endQuiz(Intent intent, Session session) {
+        int finalScore = (int) session.getAttribute(FINALSCORE);
+        game.sendScore(game.getQuizId(), userID, finalScore);
         session.setAttribute(CURRENT, MAX_QUESTIONS);
         current = MAX_QUESTIONS;
         SimpleCard card = new SimpleCard();
@@ -142,6 +155,8 @@ public class SayHelloSpeechlet implements Speechlet {
     }
 
     private SpeechletResponse startAgain(Intent intent, Session session) throws IOException {
+//        int finalScore = (int) session.getAttribute(FINALSCORE);
+//        game.sendScore(game.getQuizId(), userID, finalScore);
         resetGame(session);
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
@@ -153,6 +168,7 @@ public class SayHelloSpeechlet implements Speechlet {
 
     private SpeechletResponse startQuizGame(Intent intent, Session session) throws IOException {
         Map<String, Slot> slots = intent.getSlots();
+        userID = session.getUser().getUserId();
         Slot s = slots.get(DECISION);
         String speechText = " ";
         if (current == 0) {
@@ -256,6 +272,8 @@ public class SayHelloSpeechlet implements Speechlet {
             return game.outputQuestion(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
         } else {
+            int finalScore = (int) session.getAttribute(FINALSCORE);
+            game.sendScore(game.getQuizId(), userID, finalScore);
             return "<break time=\"0.8s\" /> " + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> " + REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + REPLIES[2];
 
         }
@@ -314,7 +332,9 @@ public class SayHelloSpeechlet implements Speechlet {
      */
     private SpeechletResponse getHelpResponse() {
         String speechText;
-        speechText = "<p>Hello user, I did not understand what you meant!</p>  <p>You can accept or deny the quiz you have been given. You can also ask me to repeat the question, skip the question, end quiz, check score, start again or play a different quiz. Dont forget you can also add quizzes and question using my website</p>";
+//        speechText = "<p>Hello user, I did not understand what you meant!</p>  <p>You can accept or deny the quiz you have been given. You can also ask me to repeat the question, skip the question, end quiz, check score, start again or play a different quiz. Dont forget you can also add quizzes and question using my website</p>";
+        speechText = "<p>Can you repeat that again please ? </p>";
+
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Help");
@@ -338,3 +358,4 @@ public class SayHelloSpeechlet implements Speechlet {
 
     }
 }
+
