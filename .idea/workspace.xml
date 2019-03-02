@@ -3,20 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/TestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/GameApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/GameApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/WebREST/RequestObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/Utils/RequestObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/WebREST/WebResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/Utils/WebResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/WebREST/WebUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/Utils/WebUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/questionsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/questionsApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/quizApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/quizApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Game/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Models/Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Models/Question.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/REST/questionsApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/REST/questionsApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/REST/quizApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/REST/quizApi.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="336" lean-forward="true" selection-start-line="336" selection-end-line="336" />
+            <state relative-caret-position="181">
+              <caret line="141" column="39" selection-start-line="141" selection-start-column="39" selection-end-line="141" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -251,7 +238,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551546022778" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551547481903" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -441,12 +428,12 @@
       <workItem from="1550938486556" duration="13842000" />
       <workItem from="1551126525204" duration="79000" />
       <workItem from="1551192817821" duration="3694000" />
-      <workItem from="1551529560132" duration="7548000" />
+      <workItem from="1551529560132" duration="8543000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147526000" />
+    <option name="totallyTimeSpent" value="148521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -461,7 +448,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23104435" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23104435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -470,7 +457,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49785408" visible="true" weight="0.30963856" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49785408" visible="true" weight="0.30963856" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49928468" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -694,8 +681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="336" lean-forward="true" selection-start-line="336" selection-end-line="336" />
+        <state relative-caret-position="181">
+          <caret line="141" column="39" selection-start-line="141" selection-start-column="39" selection-end-line="141" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

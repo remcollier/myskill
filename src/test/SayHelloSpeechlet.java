@@ -15,6 +15,7 @@ public class SayHelloSpeechlet implements Speechlet {
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
     //    private String User = "User";
+        private String CHECK = "false";
     private String userID;
     private static final String LETTERS = "letters";
     private int current = 0;
@@ -40,6 +41,7 @@ public class SayHelloSpeechlet implements Speechlet {
             throws SpeechletException {
         System.out.println("onLaunch requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+        session.setAttribute(CHECK,"false");
 
 //        session.setAttribute(User, session.getUser().getUserId());
         return getWelcomeResponse();
@@ -52,6 +54,7 @@ public class SayHelloSpeechlet implements Speechlet {
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
         System.out.println("intentName : " + intentName);
+
         if ("SelectQuiz".equals(intentName)) {
             try {
                 return startQuizGame(intent, session);
@@ -135,7 +138,16 @@ public class SayHelloSpeechlet implements Speechlet {
     private SpeechletResponse repeatQuestion(Intent intent, Session session) {
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
-        String speechText = game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+        String speechText;
+        if (session.getAttribute(CHECK).equals("false")) {
+             speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + "Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
+
+        }
+        else{
+            speechText = game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+
+
+        }
         card.setContent(speechText);
 
         return createResponse(speechText);
@@ -171,12 +183,13 @@ public class SayHelloSpeechlet implements Speechlet {
         userID = session.getUser().getUserId();
         Slot s = slots.get(DECISION);
         String speechText = " ";
+
         if (current == 0) {
             if (s.getValue().equalsIgnoreCase("Accept")) {
                 game.setQuestions();
                 //setting up sessions
                 MAX_QUESTIONS = game.getNumofQuestions();
-
+                session.setAttribute(CHECK,"true");
                 session.setAttribute(CURRENT, 0);
                 session.setAttribute(FINALSCORE, 0);
                 game.assignAnswers(0);
@@ -346,6 +359,8 @@ public class SayHelloSpeechlet implements Speechlet {
             throws SpeechletException {
         System.out.println("onSessionStarted requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
+
+        session.setAttribute(CHECK,"false");
 
     }
 
