@@ -20,9 +20,8 @@ public class questionsApi {
         RequestObject obj = new RequestObject();
         obj.method = "GET";
         obj.type = "text/html";
-
-        obj.url = "http://alexa-cs.ucd.ie:8080/api/quiz/" + id;
-//        obj.url = "http://localhost:80/api/quiz/" + id;
+        URL url = new URL("/api/quiz/" + id);
+        obj.url = url.getUrl();
         WebResponse rest = WebUtils.sendRequest(obj);
 
 //        WebUtils.sendRequest()

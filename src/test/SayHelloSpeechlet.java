@@ -15,7 +15,7 @@ public class SayHelloSpeechlet implements Speechlet {
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
     //    private String User = "User";
-        private String CHECK = "false";
+    private String CHECK = "false";
     private String userID;
     private static final String LETTERS = "letters";
     private int current = 0;
@@ -41,7 +41,7 @@ public class SayHelloSpeechlet implements Speechlet {
             throws SpeechletException {
         System.out.println("onLaunch requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
-        session.setAttribute(CHECK,"false");
+        session.setAttribute(CHECK, "false");
 
 //        session.setAttribute(User, session.getUser().getUserId());
         return getWelcomeResponse();
@@ -140,10 +140,9 @@ public class SayHelloSpeechlet implements Speechlet {
         card.setTitle(intent.getName());
         String speechText;
         if (session.getAttribute(CHECK).equals("false")) {
-             speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + "Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
+            speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + "Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
 
-        }
-        else{
+        } else {
             speechText = game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
 
@@ -189,22 +188,23 @@ public class SayHelloSpeechlet implements Speechlet {
                 game.setQuestions();
                 //setting up sessions
                 MAX_QUESTIONS = game.getNumofQuestions();
-                session.setAttribute(CHECK,"true");
+                session.setAttribute(CHECK, "true");
                 session.setAttribute(CURRENT, 0);
                 session.setAttribute(FINALSCORE, 0);
                 game.assignAnswers(0);
                 speechText += " Wise Choice! " + "<break time=\"0.3s\" /> " + " before we begin," + "<break time=\"0.5s\" /> " + " there are  " + MAX_QUESTIONS + "  questions in total. " + "<break time=\"0.6s\" /> " + game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
-            } else if (s.getValue().equalsIgnoreCase("Deny")) {
+//            } else  (s.getValue().equalsIgnoreCase("Deny")) {
+            }  else{
                 //add random quiz selector here
                 game.chooseQuiz();
                 MAX_QUESTIONS = game.getNumofQuestions();
                 speechText += " You have chosen a different Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
-
-            } else {
-
-                getWelcomeResponse();
             }
+//            } else {
+//
+//                getWelcomeResponse();
+//            }
         } else {
             getHelpResponse();
         }
@@ -360,7 +360,7 @@ public class SayHelloSpeechlet implements Speechlet {
         System.out.println("onSessionStarted requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
 
-        session.setAttribute(CHECK,"false");
+        session.setAttribute(CHECK, "false");
 
     }
 

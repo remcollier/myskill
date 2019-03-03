@@ -13,13 +13,16 @@ import java.util.List;
 public class quizApi {
     private List<Quiz> list;
     private ObjectMapper mapper = new ObjectMapper();
+    RequestObject obj = new RequestObject();
 
-    public String getApiQuizzes() {
-        RequestObject obj = new RequestObject();
+    public quizApi() {
         obj.method = "GET";
         obj.type = "text/html";
-        obj.url = "http://alexa-cs.ucd.ie:8080/api/allquizzes";
-//        obj.url = "http://localhost:80/api/allquizzes";
+        URL url= new URL("/api/allquizzes");
+        obj.url =url.getUrl();
+    }
+
+    public String getApiQuizzes() {
         WebResponse rest = WebUtils.sendRequest(obj);
         return rest.getContent();
     }
