@@ -2,8 +2,10 @@ package Game;
 
 import Models.Question;
 import Models.Quiz;
+import REST.GameApi;
 import REST.questionsApi;
 import REST.quizApi;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,6 +23,9 @@ public class GamePlayInfo {
     private Quiz chosenQuiz = new Quiz();
     private int currentQuiz = 0;
     private Long quizId;
+    private Token token = new Token();
+    GameApi gameApi = new GameApi();
+    private Score quizScore = new Score();
 
     public GamePlayInfo() throws IOException {
         this.allquizzes = quizzies.getQuizzies();
@@ -196,4 +201,25 @@ public class GamePlayInfo {
     }
 
 
+    public String getToken(String userID) {
+        token.setAccountId(userID);
+        Gson gson = new Gson();
+        String tokenRequest = gson.toJson(token);
+        String response = gameApi.sendToken(tokenRequest);
+        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='cardinal'> " + response + "</say-as>.";
+    }
+
+    public void sendScore(Long quizId, String accountID, int finalScore) {
+
+        Gson gson = new Gson();
+        quizScore.setQuizId(quizId);
+        quizScore.setAccountId(accountID);
+        quizScore.setScore(finalScore);
+        String scoreRequest = gson.toJson(quizScore);
+        gameApi.sendScore(scoreRequest);
+    }
+
+    public Long getQuizId() {
+        return chosenQuiz.getId();
+    }
 }

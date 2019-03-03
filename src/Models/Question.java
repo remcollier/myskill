@@ -1,7 +1,7 @@
 package Models;
 
 public class Question {
-    private long questionId;
+    private long id;
     private String question;
     private String right;
     private String wrong1;
@@ -19,8 +19,8 @@ public class Question {
     private Long quizId;
 
 
-    public Question(long questionId, String question, String right, String wrong1, String wrong2, String wrong3) {
-        this.questionId = questionId;
+    public Question(long id, String question, String right, String wrong1, String wrong2, String wrong3) {
+        this.id = id;
         this.question = question;
         this.right = right;
         this.wrong1 = wrong1;
@@ -41,12 +41,12 @@ public class Question {
     }
 
 
-    public long getQuestionId() {
-        return questionId;
+    public long getId() {
+        return id;
     }
 
-    public void setQuestionId(long questionId) {
-        this.questionId = questionId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getQuestion() {
