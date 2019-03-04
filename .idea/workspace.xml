@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/REST/URL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/TestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/GameApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/GameApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/questionsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/questionsApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/quizApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/quizApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/REST/URL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/URL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,6 +46,8 @@
       <find>choos</find>
       <find>sk</find>
       <find>end</find>
+      <find>ssm</find>
+      <find>repr</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/REST/WebREST</dir>
@@ -88,9 +87,9 @@
         <option value="$PROJECT_DIR$/src/REST/GameApi.java" />
         <option value="$PROJECT_DIR$/src/REST/questionsApi.java" />
         <option value="$PROJECT_DIR$/src/REST/quizApi.java" />
-        <option value="$PROJECT_DIR$/src/REST/URL.java" />
         <option value="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" />
         <option value="$PROJECT_DIR$/src/Game/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/REST/URL.java" />
       </list>
     </option>
   </component>
@@ -172,7 +171,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551639708997" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551703581989" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -362,12 +361,12 @@
       <workItem from="1550938486556" duration="13842000" />
       <workItem from="1551126525204" duration="79000" />
       <workItem from="1551192817821" duration="3694000" />
-      <workItem from="1551529560132" duration="12996000" />
+      <workItem from="1551529560132" duration="15504000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152974000" />
+    <option name="totallyTimeSpent" value="155482000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -380,7 +379,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23104435" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -516,17 +514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Score.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#482#483#0" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/REST/Utils/WebUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -564,31 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/REST/URL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-          <folding>
-            <element signature="e#85#86#0" expanded="true" />
-            <element signature="e#115#116#0" expanded="true" />
-            <element signature="e#85#86#0" expanded="true" />
-            <element signature="e#111#112#0" expanded="true" />
-            <element signature="e#149#150#0" expanded="true" />
-            <element signature="e#179#180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/REST/quizApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/REST/questionsApi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -609,10 +571,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Score.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#482#483#0" expanded="true" />
+            <element signature="e#518#519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="303" column="108" selection-start-line="303" selection-start-column="108" selection-end-line="303" selection-end-column="108" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/GamePlayInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1318">
-          <caret line="116" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="-44">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7790#7791#0" expanded="true" />
@@ -623,21 +606,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="205">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/REST/quizApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
+    <entry file="file://$PROJECT_DIR$/src/REST/URL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="197" column="20" lean-forward="true" selection-start-line="197" selection-start-column="20" selection-end-line="197" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="75">
+          <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
         </state>
       </provider>
     </entry>
