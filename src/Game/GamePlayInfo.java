@@ -206,7 +206,7 @@ public class GamePlayInfo {
         Gson gson = new Gson();
         String tokenRequest = gson.toJson(token);
         String response = gameApi.sendToken(tokenRequest);
-        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='cardinal'> " + response + "</say-as>.";
+        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='spell-out'>" + response + "</say-as>.";
     }
 
     public void sendScore(Long quizId, String accountID, int finalScore) {

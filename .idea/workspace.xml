@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/TestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/URL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/URL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlexaConsoleEntryPackage.json" beforeDir="false" afterPath="$PROJECT_DIR$/AlexaConsoleEntryPackage.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/GamePlayInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Game/GamePlayInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Game/GamePlayInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,7 +32,59 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Game/GamePlayInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2790">
+              <caret line="204" column="35" selection-start-line="204" selection-start-column="35" selection-end-line="204" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Game/Token.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/REST/URL.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AlexaConsoleEntryPackage.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3210">
+              <caret line="214" column="13" lean-forward="true" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -65,7 +120,6 @@
         <option value="$PROJECT_DIR$/src/test/Question.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/AlexaConsoleEntryPackage.json" />
         <option value="$PROJECT_DIR$/src/test/WebUtils.java" />
         <option value="$PROJECT_DIR$/src/test/WebResponse.java" />
         <option value="$PROJECT_DIR$/src/test/RequestObject.java" />
@@ -83,13 +137,14 @@
         <option value="$PROJECT_DIR$/src/Game/test.java" />
         <option value="$PROJECT_DIR$/src/Models/Question.java" />
         <option value="$PROJECT_DIR$/src/REST/WebREST/RequestObject.java" />
-        <option value="$PROJECT_DIR$/src/Game/GamePlayInfo.java" />
         <option value="$PROJECT_DIR$/src/REST/GameApi.java" />
         <option value="$PROJECT_DIR$/src/REST/questionsApi.java" />
         <option value="$PROJECT_DIR$/src/REST/quizApi.java" />
-        <option value="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" />
         <option value="$PROJECT_DIR$/src/Game/TestClass.java" />
         <option value="$PROJECT_DIR$/src/REST/URL.java" />
+        <option value="$PROJECT_DIR$/src/Game/GamePlayInfo.java" />
+        <option value="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" />
+        <option value="$PROJECT_DIR$/AlexaConsoleEntryPackage.json" />
       </list>
     </option>
   </component>
@@ -119,7 +174,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
@@ -130,6 +185,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,41 +194,16 @@
               <item name="myskill" type="b2602c69:ProjectViewProjectNode" />
               <item name="myskill" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="myskill" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myskill" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myskill" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myskill" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myskill" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myskill" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="REST" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="myskill" type="b2602c69:ProjectViewProjectNode" />
-              <item name="myskill" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551703581989" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551707337127" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
@@ -361,12 +393,16 @@
       <workItem from="1550938486556" duration="13842000" />
       <workItem from="1551126525204" duration="79000" />
       <workItem from="1551192817821" duration="3694000" />
-      <workItem from="1551529560132" duration="15504000" />
+      <workItem from="1551529560132" duration="15568000" />
+      <workItem from="1551707457442" duration="3000" />
+      <workItem from="1551722589949" duration="632000" />
+      <workItem from="1551729968249" duration="256000" />
+      <workItem from="1551866556347" duration="303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155482000" />
+    <option name="totallyTimeSpent" value="156740000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -378,9 +414,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23104435" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24320458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -389,7 +426,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49785408" visible="true" weight="0.45301205" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49785408" weight="0.4522293" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49928468" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -427,13 +464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="61" column="43" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AlexaConsoleEntryPackage.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2985">
-          <caret line="199" column="1" selection-start-line="199" selection-start-column="1" selection-end-line="199" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -503,17 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding>
-            <element signature="e#194#195#0" expanded="true" />
-            <element signature="e#228#229#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/REST/Utils/WebUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
@@ -561,16 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/REST/GameApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game/Score.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -578,28 +587,6 @@
           <folding>
             <element signature="e#482#483#0" expanded="true" />
             <element signature="e#518#519#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="303" column="108" selection-start-line="303" selection-start-column="108" selection-end-line="303" selection-end-column="108" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game/GamePlayInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7790#7791#0" expanded="true" />
-            <element signature="e#7831#7832#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -621,10 +608,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/REST/GameApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/GamePlayInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2790">
+          <caret line="204" column="35" selection-start-line="204" selection-start-column="35" selection-end-line="204" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/REST/URL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AlexaConsoleEntryPackage.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3210">
+          <caret line="214" column="13" lean-forward="true" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="13" />
         </state>
       </provider>
     </entry>
