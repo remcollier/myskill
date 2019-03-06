@@ -36,6 +36,8 @@ public class GamePlayInfo {
 
     }
 
+
+
     public int getNumofQuestions() {
         return allquestions.size();
     }
@@ -85,7 +87,7 @@ public class GamePlayInfo {
     }
 
     public String getWelcomeQuizMessage() {
-        String s = "<p> The quiz chosen is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + " Accept to continue with this quiz" + "<break time=\"0.5s\" /> " + "or deny to be given another quiz!  ";
+        String s = "<p> The quiz is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + "<break time=\"0.5s\" /> "  ;
         System.out.println(s);
         return s;
     }

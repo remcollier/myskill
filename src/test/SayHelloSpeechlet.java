@@ -10,18 +10,22 @@ import java.io.IOException;
 import java.util.Map;
 
 public class SayHelloSpeechlet implements Speechlet {
-    private GamePlayInfo game = new GamePlayInfo();
-    private static final String DECISION = "QuizDecision";
+    //    private GamePlayInfo game = null;
+    private GamePlayInfo game = null;
+
+    private static final String DayQuiz = "DayQuiz";
     private String CURRENT = "Current";
     private String FINALSCORE = "Score";
-    //    private String User = "User";
-    private String CHECK = "false";
+    private String QUIZGAME = "Game";
+
+    private String SelectQuiz = "SelectQuizz";
+    private String CHECK = "Check";
     private String userID;
     private static final String LETTERS = "letters";
     private int current = 0;
     private int score = 0;
     private int MAX_QUESTIONS = 0;
-    private static String REPLIES[] = {" You have scored ", " out of " + "<break time=\"0.3s\" /> ", ", Would you like to play this quiz again," + "<break time=\"0.3s\" /> " + " play another quiz " + "<break time=\"0.8s\" /> " + "or quit?" + "<break time=\"0.5s\" /> "};
+    private static String REPLIES[] = {" You have scored ", " out of " + "<break time=\"0.3s\" /> ", ", Would you like to play this quiz again," + "<break time=\"0.3s\" /> " + " play another random quiz," + "<break time=\"0.3s\" /> " + " play quiz of the day, " + "<break time=\"0.3s\" /> " + "or quit?" + "<break time=\"0.5s\" /> "};
 
     public SayHelloSpeechlet() throws IOException {
 
@@ -42,8 +46,6 @@ public class SayHelloSpeechlet implements Speechlet {
         System.out.println("onLaunch requestId={}, sessionId={} " + request.getRequestId()
                 + " - " + session.getSessionId());
         session.setAttribute(CHECK, "false");
-
-//        session.setAttribute(User, session.getUser().getUserId());
         return getWelcomeResponse();
     }
 
@@ -81,11 +83,21 @@ public class SayHelloSpeechlet implements Speechlet {
             return getMyScore(intent, session);
         } else if ("PlayNext".equals(intentName) & current == MAX_QUESTIONS) {
             return playNextQuiz(intent, session);
+        } else if ("PlayQuizOD".equals(intentName) & current == MAX_QUESTIONS) {
+            return playQuizOD(intent, session);
         } else {
             return getHelpResponse();
         }
 
         return getHelpResponse();
+    }
+
+    private SpeechletResponse playQuizOD(Intent intent, Session session) {
+        String speechText = " worked";
+        SimpleCard card = new SimpleCard();
+        card.setTitle(intent.getName());
+        card.setContent(speechText);
+        return createResponse(speechText);
     }
 
     private SpeechletResponse getToken(Intent intent, Session session) {
@@ -104,8 +116,8 @@ public class SayHelloSpeechlet implements Speechlet {
         score = 0;
         current = 0;
         game.chooseQuiz();
-//        MAX_QUESTIONS = game.getNumofQuestions();
-        speechText += " You have chosen to play the next Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
+//      MAX_QUESTIONS = game.getNumofQuestions();
+        speechText += " You have chosen to play another random Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage() + "<break time=\"0.5s\" /> " + game.questionSingleOutput(game.getQuestion(current));
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
         card.setContent(speechText);
@@ -140,8 +152,9 @@ public class SayHelloSpeechlet implements Speechlet {
         card.setTitle(intent.getName());
         String speechText;
         if (session.getAttribute(CHECK).equals("false")) {
-            speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + "Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
-
+            speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" +
+                    "<break time=\"0.3s\" /> " + "<p> Ask me at any time to generate a code for registration </p>" + "<break time=\"0.6s\" /> " +
+                    "To answer choose a letter. Would you like to play a random quiz or play quiz of the day? " + "<break time=\"0.3s\" /> ";
         } else {
             speechText = game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
 
@@ -166,8 +179,6 @@ public class SayHelloSpeechlet implements Speechlet {
     }
 
     private SpeechletResponse startAgain(Intent intent, Session session) throws IOException {
-//        int finalScore = (int) session.getAttribute(FINALSCORE);
-//        game.sendScore(game.getQuizId(), userID, finalScore);
         resetGame(session);
         SimpleCard card = new SimpleCard();
         card.setTitle(intent.getName());
@@ -178,13 +189,12 @@ public class SayHelloSpeechlet implements Speechlet {
     }
 
     private SpeechletResponse startQuizGame(Intent intent, Session session) throws IOException {
-        Map<String, Slot> slots = intent.getSlots();
         userID = session.getUser().getUserId();
-        Slot s = slots.get(DECISION);
-        String speechText = " ";
-
+        String s = intent.getSlot(SelectQuiz).getResolutions().getResolutionsPerAuthority().get(0).getValueWrappers().get(0).getValue().getName();
+        String speechText = "";
         if (current == 0) {
-            if (s.getValue().equalsIgnoreCase("Accept")) {
+            if (s.equalsIgnoreCase("Random")) {
+                game = new GamePlayInfo();
                 game.setQuestions();
                 //setting up sessions
                 MAX_QUESTIONS = game.getNumofQuestions();
@@ -193,14 +203,11 @@ public class SayHelloSpeechlet implements Speechlet {
                 session.setAttribute(FINALSCORE, 0);
                 game.assignAnswers(0);
                 speechText += " Wise Choice! " + "<break time=\"0.3s\" /> " + " before we begin," + "<break time=\"0.5s\" /> " + " there are  " + MAX_QUESTIONS + "  questions in total. " + "<break time=\"0.6s\" /> " + game.questionSingleOutput(game.getQuestion((Integer) session.getAttribute(CURRENT)));
+                
+            } else if (s.equalsIgnoreCase("DayQuiz")) {
 
-            } else if (s.getValue().equalsIgnoreCase("Deny")) {
-//            }  else{
-                //add random quiz selector here
-                game.chooseQuiz();
-                MAX_QUESTIONS = game.getNumofQuestions();
-                speechText += " You have chosen a different Quiz,  " + "<break time=\"0.3s\" /> " + game.getWelcomeQuizMessage();
-//            }
+                speechText += " Worked well done ";
+
             } else {
 
                 getWelcomeResponse();
@@ -223,7 +230,9 @@ public class SayHelloSpeechlet implements Speechlet {
      */
     private SpeechletResponse getWelcomeResponse() {
 //        // setting up sample questions
-        String speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" + "<break time=\"0.3s\" /> " + "Get Ready, a quiz will be chosen at random. " + game.getWelcomeQuizMessage();
+        String speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" +
+                "<break time=\"0.3s\" /> " + "<p> Ask me at any time to generate a code for registration </p>" + "<break time=\"0.6s\" /> " +
+                "To answer choose a letter. Would you like to play a random quiz or play quiz of the day? " + "<break time=\"0.3s\" /> ";
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Welcome");
@@ -296,8 +305,8 @@ public class SayHelloSpeechlet implements Speechlet {
         // Create the plain text output.
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
-//        Reprompt reprompt = new Reprompt();
-//        reprompt.setOutputSpeech(speech);
+        Reprompt reprompt = new Reprompt();
+        reprompt.setOutputSpeech(speech);
         //changing voice
 //        String name = "Emma";
 //        return newAskResponse("<speak>" + "<voice name='" + name + "'>" + speechText + "</voice>" + "</speak>", true, speechText, false);
