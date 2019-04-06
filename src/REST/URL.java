@@ -2,7 +2,7 @@ package REST;
 
 public class URL {
 
-    //   private String url="http://localhost:80";
+//       private String url="http://localhost:80";
     private String url="http://alexa-cs.ucd.ie:80";
 
     public URL(String url) {

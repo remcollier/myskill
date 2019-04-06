@@ -1,3 +1,4 @@
 REST/Utils/RequestObject.class
 REST/Utils/WebResponse.class
 REST/Utils/WebUtils.class
+Game/GameFunctionality.class

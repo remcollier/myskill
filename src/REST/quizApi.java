@@ -18,13 +18,7 @@ public class quizApi {
     public quizApi() {
         obj.method = "GET";
         obj.type = "text/html";
-        URL url= new URL("/api/allquizzes");
-        obj.url =url.getUrl();
-    }
 
-    public String getApiQuizzes() {
-        WebResponse rest = WebUtils.sendRequest(obj);
-        return rest.getContent();
     }
 
     public List<Quiz> convertQuizToList(String str) throws IOException {
@@ -33,13 +27,95 @@ public class quizApi {
     }
 
     public List<Quiz> getQuizzies() throws IOException {
-        list = convertQuizToList(getApiQuizzes());
+        URL url = new URL("/api/allquizzes");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        list = convertQuizToList(rest.getContent());
         return list;
     }
 
-//    public static void main(String[] args) throws IOException {
-//        quizApi q = new quizApi();
-//        List<Quiz> l = q.getQuizzies();
-//        System.out.println(l.get(0).getId());
-//    }
+
+    public Quiz getQTD() throws IOException {
+        URL url = new URL("/api/quizOfDay");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        Quiz s = mapper.readValue(rest.getContent(), Quiz.class);
+        return s;
+    }
+
+    public List<Quiz> getEasyQ() throws IOException {
+        URL url = new URL("/api/easyQuiz");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        list = convertQuizToList(rest.getContent());
+        if (list.isEmpty()) {
+            return getQuizzies();
+        }
+
+        return list;
+    }
+
+    public List<Quiz> getHardQ() throws IOException {
+        URL url = new URL("/api/hardQuiz");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        list = convertQuizToList(rest.getContent());
+        if (list.isEmpty())
+        {
+            return getMediumQ();
+        }
+        return list;
+    }
+
+    public List<Quiz> getMediumQ() throws IOException {
+        URL url = new URL("/api/mediumQuiz");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        list = convertQuizToList(rest.getContent());
+        if (list.isEmpty())
+        {
+            return getEasyQ();
+        }
+        return list;
+    }
+
+    public List<Quiz> mostPlayed() throws IOException {
+        URL url = new URL("/api/mostPlayed");
+        obj.url = url.getUrl();
+        WebResponse rest = WebUtils.sendRequest(obj);
+        list = convertQuizToList(rest.getContent());
+        return list;
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        quizApi q = new quizApi();
+        List<Quiz> l = q.getEasyQ();
+        System.out.println(l.size());
+        List<Quiz> g = q.getHardQ();
+        List<Quiz> f = q.getMediumQ();
+        System.out.println(g.size());
+        System.out.println(f.size());
+
+
+    }
 }
+
+
+//    public String getApiQuizzes() {
+//        URL url= new URL("/api/allquizzes");
+//        obj.url =url.getUrl();
+//        WebResponse rest = WebUtils.sendRequest(obj);
+//
+//        return rest.getContent();
+//    }
+//
+//    public List<Quiz> convertQuizToList(String str) throws IOException {
+//        List<Quiz> quizList = Arrays.asList(mapper.readValue(str, Quiz[].class));
+//        return quizList;
+//    }
+//
+//    public List<Quiz> getQuizzies() throws IOException {
+//        list = convertQuizToList(getApiQuizzes());
+//        return list;
+//    }
