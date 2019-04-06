@@ -2,6 +2,8 @@ package Game;
 
 import Models.Question;
 import Models.Quiz;
+import Models.Score;
+import Models.Token;
 import REST.GameApi;
 import REST.questionsApi;
 import REST.quizApi;
@@ -27,13 +29,73 @@ public class GamePlayInfo {
     GameApi gameApi = new GameApi();
     private Score quizScore = new Score();
 
-    public GamePlayInfo() throws IOException {
+
+    public GamePlayInfo() {
+    }
+
+    public void RandomGame() throws IOException {
+
         this.allquizzes = quizzies.getQuizzies();
         this.numOfQuiz = allquizzes.size();
         this.setShuffledQuizzies();
         chooseQuiz();
         System.out.println("number of quizzes: " + numOfQuiz);
 
+    }
+
+    public void QuizOfTheDay() throws IOException {
+        setChosenQuiz(quizzies.getQTD());
+        setQuizId(quizzies.getQTD().getId());
+        System.out.println("number of quizzes: " + chosenQuiz.getTitle());
+
+    }
+
+    public void HardQuiz() throws IOException {
+        this.allquizzes = quizzies.getHardQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void EasyQuiz() throws IOException {
+        this.allquizzes = quizzies.getEasyQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void MediumQuiz() throws IOException {
+        this.allquizzes = quizzies.getMediumQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void MostPlayed() throws IOException {
+        this.allquizzes = quizzies.mostPlayed();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void setQuizId(Long quizId) {
+        this.quizId = quizId;
+    }
+
+    public Quiz getChosenQuiz() {
+        return chosenQuiz;
+    }
+
+    public void setChosenQuiz(Quiz chosenQuiz) {
+        this.chosenQuiz = chosenQuiz;
     }
 
     public int getNumofQuestions() {
@@ -59,8 +121,6 @@ public class GamePlayInfo {
 
     public void setShuffledQuizzies() {
         Collections.shuffle(this.allquizzes);
-//        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
-
 
     }
 
@@ -85,7 +145,7 @@ public class GamePlayInfo {
     }
 
     public String getWelcomeQuizMessage() {
-        String s = "<p> The quiz chosen is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + " Accept to continue with this quiz" + "<break time=\"0.5s\" /> " + "or deny to be given another quiz!  ";
+        String s = "<p> The quiz is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + "<break time=\"0.5s\" /> ";
         System.out.println(s);
         return s;
     }
@@ -114,7 +174,8 @@ public class GamePlayInfo {
 
     public boolean checkAnswer(String letter) {
         boolean check = false;
-        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
+//        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
+        if (this.letter.equalsIgnoreCase(String.valueOf(letter))) {
             check = true;
         }
         return check;
@@ -154,26 +215,35 @@ public class GamePlayInfo {
 
         String string = " ";
         int low = 1;
-        int high = 6;
+        int high = 9;
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = " <p><prosody volume=\"x-loud\"> Fantastic </prosody> Well done</p>";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_large_crowd_cheer_03'/>  <p> Fantastic " + "<break time=\"0.5s\" /> " + " Well done</p>";
                 break;
             case 2:
-                string = " <p> You are correct ! You are smart after all</p> ";
+                string = "<audio src='soundbank://soundlibrary/human/amzn_sfx_large_crowd_cheer_01'/> <p> You are correct ! You are smart after all</p> ";
                 break;
             case 3:
-                string = " <p>  <prosody volume=\"x-loud\">Hmmmm </prosody> </p> That is correct did you cheat ... ? ";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_boo_01'/> <p>  <prosody volume=\"x-loud\">Hmmmm </prosody> </p> That is correct did you cheat ... ? ";
                 break;
             case 4:
-                string = " <p> Good answer, You are Correct </p> ";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_drinking_slurp_01'/>  <p> Good answer, You are Correct </p> ";
                 break;
             case 5:
-                string = "<p> Well done that is correct </p> ";
+                string = " <p> Well done that is correct </p> <audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_applause_03'/>";
                 break;
             case 6:
-                string = "<p> Great Job </p> ";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_cheer_med_01'/> <p> Great Job, You are really good </p> ";
+                break;
+            case 7:
+                string = " <say-as interpret-as=\"interjection\"> bravo </say-as>   <p> Good answer, You are Correct </p> ";
+                break;
+            case 8:
+                string = " <p> <say-as interpret-as=\"interjection\">Woo hoo</say-as> Well done that is correct </p>";
+                break;
+            case 9:
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_applause_05'/> <p> Great Job, You are really good </p> ";
                 break;
         }
 
@@ -183,19 +253,34 @@ public class GamePlayInfo {
     public String outputIncorrectAnswer(String answer) {
         String string = " ";
         int low = 1;
-        int high = 3;
+        int high = 7;
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = " <p> Unlucky!!! </p>   The answer was " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + ". ";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_laughter_giggle_01'/> <p> Unlucky!!! </p>   The answer was " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + ". ";
                 break;
             case 2:
-                string = "<p> Hard luck ! The answer was</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " . ";
+                string = "<audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_boo_02'/> <p> Hard luck ! The answer was</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " . ";
                 break;
             case 3:
-                string = "<p> Better luck next time!</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " was the answer.  ";
+                string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_laughter_01'/> <p> Better luck next time!</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " was the answer.  ";
+                break;
+
+            case 4:
+                string = " <say-as interpret-as=\"interjection\">aw man</say-as> <p> Better luck next time!</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " was the answer.  ";
+                break;
+
+            case 5:
+                string = " <say-as interpret-as=\"interjection\">jeepers creepers</say-as> <p>   The answer was " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + ". </p>";
+                break;
+            case 6:
+                    string = "<say-as interpret-as=\"interjection\"> whoops a daisy </say-as><p> Hard luck ! The answer was</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " . ";
+                break;
+            case 7:
+                string = "<say-as interpret-as=\"interjection\">  mamma mia </say-as><p> Hard luck ! The answer was</p> " + "<break time=\"0.5s\" /> " + letter + "<break time=\"0.3s\" /> " + answer + " . ";
                 break;
         }
+
 
         return string;
     }
@@ -206,7 +291,7 @@ public class GamePlayInfo {
         Gson gson = new Gson();
         String tokenRequest = gson.toJson(token);
         String response = gameApi.sendToken(tokenRequest);
-        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='cardinal'> " + response + "</say-as>.";
+        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='spell-out'>" + response + "</say-as>.";
     }
 
     public void sendScore(Long quizId, String accountID, int finalScore) {

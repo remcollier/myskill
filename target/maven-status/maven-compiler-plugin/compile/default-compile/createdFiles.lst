@@ -1,3 +1,7 @@
+Models/Score.class
+Game/Multiplayer.class
 REST/Utils/RequestObject.class
 REST/Utils/WebResponse.class
 REST/Utils/WebUtils.class
+Models/Token.class
+Game/GameFunctionality.class
