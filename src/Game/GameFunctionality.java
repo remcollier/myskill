@@ -111,13 +111,13 @@ public class GameFunctionality {
         String message = null;
         if (choice.equalsIgnoreCase("Hard")) {
             game.HardQuiz();
-            message = " Someone is feeling brave! ";
+            message = "<say-as interpret-as=\"interjection\"> ooh la la </say-as> ";
         } else if (choice.equalsIgnoreCase("Medium")) {
             game.MediumQuiz();
-            message = " Whooooop!  ";
+            message = "<say-as interpret-as=\"interjection\"> tee hee </say-as>  ";
         } else if (choice.equalsIgnoreCase("Easy")) {
             game.EasyQuiz();
-            message = " Wise Choice! ";
+            message = "<audio src='soundbank://soundlibrary/human/amzn_sfx_clear_throat_ahem_01'/>   Wise Choice! ";
 
         }
         gameSesssion = true;
@@ -254,7 +254,7 @@ public class GameFunctionality {
      */
     public SpeechletResponse getWelcomeResponse() {
 //        // setting up sample questions
-        String speechText = "<p> Welcome to Abdul's Quiz Trivia game. </p>" +
+        String speechText = " <p> Welcome to Abdul's Quiz Trivia game. </p>" +
                 "<break time=\"0.3s\" /> " + "<p> Ask me at any time to generate a code for registration </p>" + "<break time=\"0.3s\" /> " +
                 "To answer a question choose a letter." + "<break time=\"0.3s\" /> " + "Would you like to play a random quiz , Multi-player or play quiz of the day? " + "<break time=\"0.3s\" /> ";
         // Create the Simple card content.
@@ -322,7 +322,7 @@ public class GameFunctionality {
             current = MAX_QUESTIONS;
             game.sendScore(game.getQuizId(), userID, finalScore);
             gameSesssion = false;
-            return "<break time=\"0.8s\" /> " + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> " + REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + REPLIES[2];
+            return "<say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> " + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> " + REPLIES[0] + session.getAttribute(FINALSCORE) + REPLIES[1] + MAX_QUESTIONS + REPLIES[2];
 
         }
     }
