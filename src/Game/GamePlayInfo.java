@@ -2,6 +2,8 @@ package Game;
 
 import Models.Question;
 import Models.Quiz;
+import Models.Score;
+import Models.Token;
 import REST.GameApi;
 import REST.questionsApi;
 import REST.quizApi;
@@ -20,9 +22,6 @@ public class GamePlayInfo {
     private Random r = new Random();
     private quizApi quizzies = new quizApi();
     private questionsApi questions = new questionsApi();
-
-
-
     private Quiz chosenQuiz = new Quiz();
     private int currentQuiz = 0;
     private Long quizId;
@@ -30,14 +29,6 @@ public class GamePlayInfo {
     GameApi gameApi = new GameApi();
     private Score quizScore = new Score();
 
-//    public GamePlayInfo(int d) throws IOException {
-//        this.allquizzes = quizzies.getQuizzies();
-//        this.numOfQuiz = allquizzes.size();
-//        this.setShuffledQuizzies();
-//        chooseQuiz();
-//        System.out.println("number of quizzes: " + numOfQuiz);
-//
-//    }
 
     public GamePlayInfo() {
     }
@@ -52,7 +43,6 @@ public class GamePlayInfo {
 
     }
 
-    //change this
     public void QuizOfTheDay() throws IOException {
         setChosenQuiz(quizzies.getQTD());
         setQuizId(quizzies.getQTD().getId());
@@ -99,6 +89,7 @@ public class GamePlayInfo {
     public void setQuizId(Long quizId) {
         this.quizId = quizId;
     }
+
     public Quiz getChosenQuiz() {
         return chosenQuiz;
     }
@@ -184,8 +175,8 @@ public class GamePlayInfo {
     public boolean checkAnswer(String letter) {
         boolean check = false;
 //        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
-            if (this.letter.equalsIgnoreCase(String.valueOf(letter))) {
-                check = true;
+        if (this.letter.equalsIgnoreCase(String.valueOf(letter))) {
+            check = true;
         }
         return check;
     }
