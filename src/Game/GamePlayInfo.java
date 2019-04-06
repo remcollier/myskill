@@ -2,6 +2,8 @@ package Game;
 
 import Models.Question;
 import Models.Quiz;
+import Models.Score;
+import Models.Token;
 import REST.GameApi;
 import REST.questionsApi;
 import REST.quizApi;
@@ -27,13 +29,73 @@ public class GamePlayInfo {
     GameApi gameApi = new GameApi();
     private Score quizScore = new Score();
 
-    public GamePlayInfo() throws IOException {
+
+    public GamePlayInfo() {
+    }
+
+    public void RandomGame() throws IOException {
+
         this.allquizzes = quizzies.getQuizzies();
         this.numOfQuiz = allquizzes.size();
         this.setShuffledQuizzies();
         chooseQuiz();
         System.out.println("number of quizzes: " + numOfQuiz);
 
+    }
+
+    public void QuizOfTheDay() throws IOException {
+        setChosenQuiz(quizzies.getQTD());
+        setQuizId(quizzies.getQTD().getId());
+        System.out.println("number of quizzes: " + chosenQuiz.getTitle());
+
+    }
+
+    public void HardQuiz() throws IOException {
+        this.allquizzes = quizzies.getHardQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void EasyQuiz() throws IOException {
+        this.allquizzes = quizzies.getEasyQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void MediumQuiz() throws IOException {
+        this.allquizzes = quizzies.getMediumQ();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void MostPlayed() throws IOException {
+        this.allquizzes = quizzies.mostPlayed();
+        this.numOfQuiz = allquizzes.size();
+        this.setShuffledQuizzies();
+        chooseQuiz();
+        System.out.println("number of quizzes: " + numOfQuiz);
+
+    }
+
+    public void setQuizId(Long quizId) {
+        this.quizId = quizId;
+    }
+
+    public Quiz getChosenQuiz() {
+        return chosenQuiz;
+    }
+
+    public void setChosenQuiz(Quiz chosenQuiz) {
+        this.chosenQuiz = chosenQuiz;
     }
 
     public int getNumofQuestions() {
@@ -59,8 +121,6 @@ public class GamePlayInfo {
 
     public void setShuffledQuizzies() {
         Collections.shuffle(this.allquizzes);
-//        System.out.println("Shuffling here: " + allquizzes.get(0).getTitle());
-
 
     }
 
@@ -85,7 +145,7 @@ public class GamePlayInfo {
     }
 
     public String getWelcomeQuizMessage() {
-        String s = "<p> The quiz chosen is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + " Accept to continue with this quiz" + "<break time=\"0.5s\" /> " + "or deny to be given another quiz!  ";
+        String s = "<p> The quiz is called  " + chosenQuiz.getTitle() + ".</p> " + "<break time=\"0.3s\" /> " + "<break time=\"0.5s\" /> ";
         System.out.println(s);
         return s;
     }
@@ -114,7 +174,8 @@ public class GamePlayInfo {
 
     public boolean checkAnswer(String letter) {
         boolean check = false;
-        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
+//        if (this.letter.equalsIgnoreCase(String.valueOf(letter.charAt(0)))) {
+        if (this.letter.equalsIgnoreCase(String.valueOf(letter))) {
             check = true;
         }
         return check;
@@ -158,7 +219,7 @@ public class GamePlayInfo {
         int random = r.nextInt(high - low) + low;
         switch (random) {
             case 1:
-                string = " <p><prosody volume=\"x-loud\"> Fantastic </prosody> Well done</p>";
+                string = " <p><prosody volume=\"x-loud\"> Fantastic </prosody> " + "<break time=\"0.5s\" /> " + " Well done</p>";
                 break;
             case 2:
                 string = " <p> You are correct ! You are smart after all</p> ";
@@ -206,7 +267,7 @@ public class GamePlayInfo {
         Gson gson = new Gson();
         String tokenRequest = gson.toJson(token);
         String response = gameApi.sendToken(tokenRequest);
-        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='cardinal'> " + response + "</say-as>.";
+        return " The token generated for your registration is " + "<break time=\"0.5s\" /> " + "<say-as interpret-as='spell-out'>" + response + "</say-as>.";
     }
 
     public void sendScore(Long quizId, String accountID, int finalScore) {

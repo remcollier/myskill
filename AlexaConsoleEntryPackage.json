@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "fyp",
+      "invocationName": "quiz",
       "intents": [
         {
           "name": "AMAZON.FallbackIntent",
@@ -116,6 +116,30 @@
             "i {QuizDecision}",
             "{QuizDecision}"
           ]
+        },
+        {
+          "name": "PlayNext",
+          "slots": [],
+          "samples": [
+            "yeah next quiz",
+            "next quiz",
+            "play a different quiz",
+            "play another quiz",
+            "next quiz please",
+            "Play the Next Quiz"
+          ]
+        },
+        {
+          "name": "Token",
+          "slots": [],
+          "samples": [
+            "give me a token",
+            "can i get a token",
+            "token please",
+            "generate my token",
+            "generate a token",
+            "Give me my token"
+          ]
         }
       ],
       "types": [
@@ -126,6 +150,9 @@
               "name": {
                 "value": "D",
                 "synonyms": [
+                  "dd",
+                  "d.",
+                  "d",
                   "D.",
                   "Dee",
                   "d.",
@@ -138,6 +165,7 @@
               "name": {
                 "value": "C",
                 "synonyms": [
+                  "cc",
                   "cee",
                   "c",
                   "c.",
