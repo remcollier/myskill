@@ -48,10 +48,6 @@ public class quizApi {
         obj.url = url.getUrl();
         WebResponse rest = WebUtils.sendRequest(obj);
         list = convertQuizToList(rest.getContent());
-        if (list.isEmpty()) {
-            return getQuizzies();
-        }
-
         return list;
     }
 
@@ -60,10 +56,6 @@ public class quizApi {
         obj.url = url.getUrl();
         WebResponse rest = WebUtils.sendRequest(obj);
         list = convertQuizToList(rest.getContent());
-        if (list.isEmpty())
-        {
-            return getMediumQ();
-        }
         return list;
     }
 
@@ -72,10 +64,6 @@ public class quizApi {
         obj.url = url.getUrl();
         WebResponse rest = WebUtils.sendRequest(obj);
         list = convertQuizToList(rest.getContent());
-        if (list.isEmpty())
-        {
-            return getEasyQ();
-        }
         return list;
     }
 
@@ -100,22 +88,3 @@ public class quizApi {
 
     }
 }
-
-
-//    public String getApiQuizzes() {
-//        URL url= new URL("/api/allquizzes");
-//        obj.url =url.getUrl();
-//        WebResponse rest = WebUtils.sendRequest(obj);
-//
-//        return rest.getContent();
-//    }
-//
-//    public List<Quiz> convertQuizToList(String str) throws IOException {
-//        List<Quiz> quizList = Arrays.asList(mapper.readValue(str, Quiz[].class));
-//        return quizList;
-//    }
-//
-//    public List<Quiz> getQuizzies() throws IOException {
-//        list = convertQuizToList(getApiQuizzes());
-//        return list;
-//    }

@@ -43,6 +43,8 @@ public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 
             return functionality.startQuizRandom(intent, session);
         } else if ("Answer".equals(intentName) & functionality.isGameSesssion()) {
             return functionality.gameMode(intent, session);
+        } else if ("Token".equals(intentName)) {
+            return functionality.getToken(session);
         } else if ("StartAgain".equals(intentName) & !functionality.isGameSesssion()) {
             try {
                 return functionality.startAgain(intent, session);
@@ -50,10 +52,7 @@ public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 
                 e.printStackTrace();
             }
         } else if ("End".equals(intentName) & functionality.getCurrent() != functionality.getMAX_QUESTIONS() & functionality.isGameSesssion()) {
-//            functionality.setGameSesssion(false);
             return functionality.endQuiz(intent, session);
-        } else if ("Token".equals(intentName)) {
-            return functionality.getToken(session);
         } else if ("Repeat".equals(intentName)) {
             return functionality.repeatQuestion(intent, session);
         } else if ("Skip".equals(intentName) & functionality.isGameSesssion()) {
