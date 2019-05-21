@@ -240,7 +240,7 @@ public class GamePlayInfo {
                 string = " <say-as interpret-as=\"interjection\"> bravo </say-as>   <p> Good answer, You are Correct </p> ";
                 break;
             case 8:
-                string = " <p> <say-as interpret-as=\"interjection\">Woo hoo</say-as> Well done that is correct </p>";
+                string = " <say-as interpret-as=\"interjection\">Woo hoo</say-as>  <p>  Well done that is correct </p>";
                 break;
             case 9:
                 string = " <audio src='soundbank://soundlibrary/human/amzn_sfx_crowd_applause_05'/> <p> Great Job, You are really good </p> ";

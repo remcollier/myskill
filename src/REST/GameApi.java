@@ -28,6 +28,14 @@ public class GameApi {
         System.out.println(rest.getContent());
         return rest.getContent();
     }
+
+    public String sendPlayer(String object) {
+        URL url = new URL("/online");
+        obj.url = url.getUrl();
+        obj.content = object;
+        WebResponse rest = WebUtils.sendRequest(obj);
+        return rest.getContent();
+    }
 }
 
 
