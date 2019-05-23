@@ -1,21 +1,24 @@
 package test;
 
-import Game.GameFunctionality;
-import Game.Multiplayer;
+import SinglePlayer.SinglePlayer;
+import Multiplayer.Multiplayer;
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.speechlet.*;
 
 import java.io.IOException;
 
-public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 {
+public class SayHelloSpeechlet extends SinglePlayer implements SpeechletV2 {
 
 
-    GameFunctionality functionality;
-    Multiplayer multiplayer;
+    private SinglePlayer functionality;
+    private Multiplayer multiplayer;
+    // 0 for single, 1 for multiplayer
+    private String gameMode = "GAMEMODE";
+
 
     public SayHelloSpeechlet() throws IOException {
-        functionality = new GameFunctionality();
+        functionality = new SinglePlayer();
         multiplayer = new Multiplayer();
     }
 
@@ -39,37 +42,42 @@ public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 
         String intentName = (intent != null) ? intent.getName() : null;
         System.out.println("intentName : " + intentName);
 
-        if ("SelectQuiz".equals(intentName) & !functionality.isGameSesssion()) {
+        if ("SelectQuiz".equals(intentName) & !functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.startQuizRandom(intent, session);
-        } else if ("Answer".equals(intentName) & functionality.isGameSesssion()) {
+        } else if ("Answer".equals(intentName) & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.gameMode(intent, session);
         } else if ("Token".equals(intentName)) {
             return functionality.getToken(session);
-        } else if ("StartAgain".equals(intentName) & !functionality.isGameSesssion()) {
+        } else if ("StartAgain".equals(intentName) & !functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             try {
                 return functionality.startAgain(intent, session);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if ("End".equals(intentName) & functionality.getCurrent() != functionality.getMAX_QUESTIONS() & functionality.isGameSesssion()) {
+        } else if ("End".equals(intentName) & functionality.getCurrent() != functionality.getMAX_QUESTIONS() & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.endQuiz(intent, session);
-        } else if ("Repeat".equals(intentName)) {
+        } else if ("Repeat".equals(intentName) & session.getAttribute(gameMode).equals(0)) {
             return functionality.repeatQuestion(intent, session);
-        } else if ("Skip".equals(intentName) & functionality.isGameSesssion()) {
+        } else if ("Skip".equals(intentName) & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.skipQuestion(intent, session);
-        } else if ("Myscore".equals(intentName) & functionality.isGameSesssion()) {
+        } else if ("Myscore".equals(intentName) & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.getMyScore(intent, session);
         } else if ("Multiplayer".equals(intentName) & !functionality.isGameSesssion()) {
-            functionality.setGameSesssion(true);
-            return multiplayer.startMultiplayer(intent, session);
-        } else if ("Difficulty".equals(intentName) & functionality.isOptionsGiven()) {
+//            functionality.setGameSesssion(true);
+            try {
+                return multiplayer.startMultiplayer(intent, session);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if ("Difficulty".equals(intentName) & functionality.isOptionsGiven() & session.getAttribute(gameMode).equals(0)) {
 
             try {
                 return functionality.startRandomGame(intent, session);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if ("PlayNext".equals(intentName) & functionality.getCurrent() == functionality.getMAX_QUESTIONS() & !functionality.isGameSesssion()) {
+        } else if ("PlayNext".equals(intentName) & functionality.getCurrent() == functionality.getMAX_QUESTIONS() & !functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             try {
                 if (!functionality.isDifficultyChoosen()) {
                     return functionality.startQuizRandom(intent, session);
@@ -81,7 +89,7 @@ public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 
                 e.printStackTrace();
             }
 
-        } else if ("PlayQuizOD".equals(intentName) & !functionality.isGameSesssion()) {
+        } else if ("PlayQuizOD".equals(intentName) & !functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             try {
                 return functionality.playQuizOD(intent, session);
             } catch (IOException e) {
@@ -103,6 +111,7 @@ public class SayHelloSpeechlet extends GameFunctionality implements SpeechletV2 
         session.setAttribute(functionality.getQuizDiffculty(), false);
         functionality.setUserID(session.getUser().getUserId());
         functionality.setGameSesssion(false);
+        session.setAttribute(gameMode, 0);
         session.setAttribute(functionality.getCHECK(), "false");
 
     }
