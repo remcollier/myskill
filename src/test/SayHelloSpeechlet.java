@@ -65,7 +65,7 @@ public class SayHelloSpeechlet extends SinglePlayer implements SpeechletV2 {
         } else if ("Multiplayer".equals(intentName) & !functionality.isGameSesssion()) {
 //            functionality.setGameSesssion(true);
             try {
-                return multiplayer.startMultiplayer(intent, session);
+                return multiplayer.startMultiplayer(requestEnvelope);
             } catch (IOException e) {
                 e.printStackTrace();
             }
