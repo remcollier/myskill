@@ -1,6 +1,7 @@
 package Multiplayer;
 
 import Models.Match;
+import Models.Player;
 import SinglePlayer.SinglePlayer;
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.speechlet.Session;
@@ -12,11 +13,8 @@ public class Multiplayer extends SinglePlayer {
 
     private MultiplayerGameFunctionaility multiplayerGameFunctionaility = new MultiplayerGameFunctionaility();
     private Match match = new Match();
-    private String CURRENT = "Current";
-    private String SCORE1 = "Score1";
-    private String SCORE2 = "Score2";
     private String PLAYER1 = "Player1";
-    private String PLAYER2 = "Player1";
+    private String PLAYER2 = "Player2";
     private String gameMode = "GAMEMODE";
     private int MAX_QUESTIONS = 0;
 
@@ -46,14 +44,20 @@ public class Multiplayer extends SinglePlayer {
 
 
     public void startGameSetUp(Session session) throws IOException {
-        session.setAttribute(CURRENT, 0);
-        session.setAttribute(SCORE1, 0);
-        session.setAttribute(SCORE2, 0);
-        session.setAttribute(PLAYER1, match.getPlayerOne());
-        session.setAttribute(PLAYER2, match.getPlayerTwo());
+        Player player1 = new Player(match.getPlayerOne());
+        Player player2 = new Player(match.getPlayerTwo());
+        session.setAttribute(PLAYER1, player1);
+        session.setAttribute(PLAYER2, player2);
         multiplayerGameFunctionaility.GameSetupMode();
         MAX_QUESTIONS = multiplayerGameFunctionaility.getNumofQuestions();
         multiplayerGameFunctionaility.assignAnswers(0);
+    }
+
+
+    public SpeechletResponse PlayerResponse(Intent intent, Session session) throws IOException {
+        String speechText = "";
+        return createResponse(speechText);
+
     }
 
 }
