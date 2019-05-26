@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.amazon.speech.speechlet.Speechlet;
 import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
+import com.amazon.speech.speechlet.services.DirectiveServiceClient;
 
 
 public class SayHelloRequestStreamHandler extends SpeechletRequestStreamHandler {
@@ -26,7 +27,7 @@ public class SayHelloRequestStreamHandler extends SpeechletRequestStreamHandler 
     }
 
     public SayHelloRequestStreamHandler() throws IOException {
-        super(new test.SayHelloSpeechlet(), supportedApplicationIds);
+        super(new test.SayHelloSpeechlet(new DirectiveServiceClient()), supportedApplicationIds);
     }
 
     public SayHelloRequestStreamHandler(Speechlet speechlet, Set<String> supportedApplicationIds) {

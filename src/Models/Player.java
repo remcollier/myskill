@@ -1,14 +1,30 @@
 package Models;
 
-public class Player {
-    public Player(String id) {
+import java.io.Serializable;
+
+public class Player implements Serializable {
+    public Player() {
+    }
+
+    public Player(String id, int score, int count) {
+        this.id = id;
+        this.score = score;
+        this.count = count;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
     private String id;
-    private int score = 0;
-    private int count = 0;
+    private int score;
+    private int count;
     private String outcome;
+
 
     public int getScore() {
         return score;

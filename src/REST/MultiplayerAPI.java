@@ -24,11 +24,16 @@ public class MultiplayerAPI {
         URL url = new URL("/online");
         obj.url = url.getUrl();
         obj.content = object;
+        Match match = new Match();
         WebResponse rest = WebUtils.sendRequest(obj);
-        Match match = mapper.readValue(rest.getContent(), Match.class);
-        System.out.println(match.getPlayerOne());
-        System.out.println(match.getPlayerTwo());
+        try {
+            match = mapper.readValue(rest.getContent(), Match.class);
+        } catch (NullPointerException e) {
+
+            System.out.println(e.getMessage());
+        }
         return match;
+
     }
 
     public String sendToken(String object) {

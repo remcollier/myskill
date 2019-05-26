@@ -20,7 +20,7 @@ public class SinglePlayer {
     private int score = 0;
     private int MAX_QUESTIONS = 0;
     private boolean gameSesssion = false;
-    private static String REPLIES[] = {" You have scored ", " out of " + "<break time=\"0.3s\" /> ", ", Would you like to play this quiz again," + "<break time=\"0.3s\" /> " + " play another random quiz," + "<break time=\"0.3s\" /> " + " play quiz of the day, " + "<break time=\"0.3s\" /> " + "MultiplayerAPI" + "<break time=\"0.3s\" /> " + "or quit?" + "<break time=\"0.5s\" /> "};
+    private static String REPLIES[] = {" You have scored ", " out of " + "<break time=\"0.3s\" /> ", ", Would you like to play this quiz again," + "<break time=\"0.3s\" /> " + " play another random quiz," + "<break time=\"0.3s\" /> " + " play quiz of the day, " + "<break time=\"0.3s\" /> " + "Multiplayer" + "<break time=\"0.3s\" /> " + "or quit?" + "<break time=\"0.5s\" /> "};
     private boolean optionsGiven = false;
     private boolean difficultyChoosen = false;
 
