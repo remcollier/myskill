@@ -2,7 +2,6 @@ package Multiplayer;
 
 import Models.Match;
 import Models.Player;
-import Models.Question;
 import SinglePlayer.SinglePlayer;
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
@@ -29,6 +28,7 @@ public class Multiplayer extends SinglePlayer {
     private int current;
     private int score;
     static ObjectMapper mapper = new ObjectMapper();
+    private String CHECK = "Check";
 
     public Multiplayer() throws IOException {
 
@@ -44,7 +44,7 @@ public class Multiplayer extends SinglePlayer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while (match.getPlayerOne() == null && match.getPlayerTwo() == null && count != 5) {
+        while (match.getPlayerOne() == null && match.getPlayerTwo() == null && count != 15) {
 
             try {
                 match = multiplayerGameFunctionaility.enterPlayer(session);
@@ -53,7 +53,7 @@ public class Multiplayer extends SinglePlayer {
             }
             count++;
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -69,7 +69,7 @@ public class Multiplayer extends SinglePlayer {
                     + multiplayerGameFunctionaility.getQuizname()
                     + multiplayerGameFunctionaility.questionSingleOutput(multiplayerGameFunctionaility.getQuestion(0));
         } else {
-            speechText[0] += "No one was found";
+            speechText[0] += "No one was found, please try again later";
         }
         return createResponse(speechText[0]);
     }
@@ -79,6 +79,7 @@ public class Multiplayer extends SinglePlayer {
         session.setAttribute(PLAYER1, new Player(match.getPlayerOne(), 0, 0));
         session.setAttribute(PLAYER2, new Player(match.getPlayerTwo(), 0, 0));
         multiplayerGameFunctionaility.GameSetupMode();
+        match.setQuizId(multiplayerGameFunctionaility.getQuizId());
         MAX_QUESTIONS = multiplayerGameFunctionaility.getNumofQuestions();
         multiplayerGameFunctionaility.assignAnswers(0);
     }
@@ -102,12 +103,6 @@ public class Multiplayer extends SinglePlayer {
     public String getResponse(Session session, Intent intent, String cPlayer) {
         Object q = session.getAttribute(cPlayer);
         Player player = mapper.convertValue(q, Player.class);
-
-
-        System.out.println(player.getId());
-        System.out.println(player.getCount());
-        System.out.println(player.getScore());
-
         String speechText = "";
         current = player.getCount();
         System.out.println(current);
@@ -145,7 +140,8 @@ public class Multiplayer extends SinglePlayer {
         return speechText;
     }
 
-    private String checkReachedEnd(Session session, Player player, String cPlayer) {
+    //fix to send requests to db "scores"
+    public String checkReachedEnd(Session session, Player player, String cPlayer) {
         int current = player.getCount();
         String opponent;
         if (player.getCount() < MAX_QUESTIONS) {
@@ -153,32 +149,85 @@ public class Multiplayer extends SinglePlayer {
             return multiplayerGameFunctionaility.outputQuestion(multiplayerGameFunctionaility.getQuestion(current));
 
         } else {
-//            int finalScore = (int) session.getAttribute(FINALSCORE);
-//            current = MAX_QUESTIONS;
-//            multiplayerGameFunctionaility.sendScore(game.getQuizId(), userID, finalScore);
-//            gameSesssion = false;
-//            if (player.getId().equalsIgnoreCase())
             if (cPlayer.equalsIgnoreCase(PLAYER1)) {
                 opponent = PLAYER2;
                 Object q = session.getAttribute(opponent);
                 Player player2 = mapper.convertValue(q, Player.class);
-                return "<say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
-                        + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
-                        + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent scored " + player2.getScore() + " out of " + player2.getCount();
+                if (player2.getCount() < MAX_QUESTIONS) {
+                    match.setPlayerOneScore(player.getScore());
+                    multiplayerGameFunctionaility.sendScore(match);
 
+                    return "<say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
+                            + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
+                            + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent so far has scored " + player2.getScore() + " out of " + player2.getCount();
+                } else {
+                    match.setCompleted("done");
+                    match.setPlayerOneScore(player.getScore());
+                    multiplayerGameFunctionaility.sendScore(match);
+                    return "<say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
+                            + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
+                            + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent scored " + player2.getScore() + " out of " + MAX_QUESTIONS;
+
+                }
             } else {
                 opponent = PLAYER1;
                 Object q = session.getAttribute(opponent);
                 Player player2 = mapper.convertValue(q, Player.class);
-                return "<say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
-                        + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
-                        + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent scored " + player2.getScore() + " out of " + player2.getCount();
+                if (player2.getCount() < MAX_QUESTIONS) {
+                    match.setPlayerTwoScore(player.getScore());
+                    multiplayerGameFunctionaility.sendScore(match);
+                    return " <say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
+                            + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
+                            + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent so far has scored " + player2.getScore() + " out of " + player2.getCount();
+                } else {
+                    match.setPlayerTwoScore(player.getScore());
+                    match.setCompleted("done");
+                    multiplayerGameFunctionaility.sendScore(match);
+                    return " <say-as interpret-as=\"interjection\">righto </say-as> <break time=\"0.8s\" /> "
+                            + "You have reached the end of the quiz. " + "<break time=\"0.8s\" /> you have scored "
+                            + player.getScore() + " out of " + MAX_QUESTIONS + " <break time=\"0.8s\" /> And your opponent scored " + player2.getScore() + " out of " + MAX_QUESTIONS;
+
+                }
 
 
             }
 
 
         }
+    }
+
+    public SpeechletResponse skipQuestion(Intent intent, Session session) {
+        SimpleCard card = new SimpleCard();
+        card.setTitle(intent.getName());
+        String speechText;
+        speechText = " <p> You have skipped this question. </p> " + "<break time=\"0.8s\" /> ";
+        String currentPlayer = multiplayerGameFunctionaility.getCurrentPlayer(session.getUser().getUserId(), match.getPlayerOne());
+        Object q = session.getAttribute(currentPlayer);
+        Player player = mapper.convertValue(q, Player.class);
+        int current = player.getCount();
+        current++;
+        player.setCount(current++);
+        session.setAttribute(currentPlayer, player);
+        speechText += checkReachedEnd(session, player, currentPlayer);
+        card.setContent(speechText);
+        return createResponse(speechText);
+    }
+
+    public SpeechletResponse endQuiz(Intent intent, Session session) {
+        SimpleCard card = new SimpleCard();
+        card.setTitle(intent.getName());
+        String speechText;
+        speechText = " <p> You have forfeited the game. </p> " + "<break time=\"0.8s\" />  Your opponent automatically wins";
+        String currentPlayer = multiplayerGameFunctionaility.getCurrentPlayer(session.getUser().getUserId(), match.getPlayerOne());
+        Object q = session.getAttribute(currentPlayer);
+        Player player = mapper.convertValue(q, Player.class);
+        player.setCount(MAX_QUESTIONS);
+        player.setScore(0);
+        match.setCompleted(currentPlayer);
+        session.setAttribute(currentPlayer, player);
+        speechText += checkReachedEnd(session, player, currentPlayer);
+        card.setContent(speechText);
+        return createResponse(speechText);
     }
 
 

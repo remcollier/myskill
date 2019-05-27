@@ -22,7 +22,7 @@ public class TestClass {
         String userID;
         Gson gson = new Gson();
         Token token = new Token();
-        userID = "te";
+        userID = "teddfff";
         token.setAccountId(userID);
         String tokenRequest = gson.toJson(token);
         String tokenGiven = gameApi.sendToken(tokenRequest);

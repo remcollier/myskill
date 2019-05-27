@@ -5,20 +5,30 @@ public class Match {
     private Long id;
     private String playerOne;
     private String playerTwo;
-    private String playerOneScore;
-    private String playerTwoScore;
-    private String outcome;
+    private int playerOneScore;
+    private int playerTwoScore;
+    private long quizId;
+
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
+    }
+
+    private String completed;
 
     public Match() {
     }
 
-    public Match(Long id, String playerOne, String playerTwo, String playerOneScore, String playerTwoScore, String outcome) {
+    public Match(Long id, String playerOne, String playerTwo, int playerOneScore, int playerTwoScore, long quizId) {
         this.id = id;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.playerOneScore = playerOneScore;
         this.playerTwoScore = playerTwoScore;
-        this.outcome = outcome;
+        this.quizId = quizId;
     }
 
     public Long getId() {
@@ -45,28 +55,29 @@ public class Match {
         this.playerTwo = playerTwo;
     }
 
-    public String getPlayerOneScore() {
+    public int getPlayerOneScore() {
         return playerOneScore;
     }
 
-    public void setPlayerOneScore(String playerOneScore) {
+    public void setPlayerOneScore(int playerOneScore) {
         this.playerOneScore = playerOneScore;
     }
 
-    public String getPlayerTwoScore() {
+    public int getPlayerTwoScore() {
         return playerTwoScore;
     }
 
-    public void setPlayerTwoScore(String playerTwoScore) {
+    public void setPlayerTwoScore(int playerTwoScore) {
         this.playerTwoScore = playerTwoScore;
     }
 
-    public String getOutcome() {
-        return outcome;
+    public long getQuizId() {
+        return quizId;
     }
 
-    public void setOutcome(String outcome) {
-        this.outcome = outcome;
+    public void setQuizId(long quizId) {
+        this.quizId = quizId;
     }
+
 
 }

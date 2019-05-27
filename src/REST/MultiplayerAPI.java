@@ -43,4 +43,12 @@ public class MultiplayerAPI {
         WebResponse rest = WebUtils.sendRequest(obj);
         return rest.getContent();
     }
+
+    public void sendScore(String object) {
+        URL url = new URL("/match");
+        obj.url = url.getUrl();
+        obj.content = object;
+        WebResponse rest = WebUtils.sendRequest(obj);
+        System.out.println(rest.getContent());
+    }
 }

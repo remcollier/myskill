@@ -27,7 +27,6 @@ public class MultiplayerGameFunctionaility {
     private HashMap<String, String> answers = new HashMap<String, String>();
     private QuizApi quiz = new QuizApi();
 
-
     public void setGameQuiz(Quiz gameQuiz) {
         this.gameQuiz = gameQuiz;
     }
@@ -39,6 +38,10 @@ public class MultiplayerGameFunctionaility {
 
     public void setQuizId(Long quizId) {
         this.quizId = quizId;
+    }
+
+    public Long getQuizId() {
+        return quizId;
     }
 
     public void setQuestions() throws IOException {
@@ -227,11 +230,16 @@ public class MultiplayerGameFunctionaility {
 
         return string;
     }
+
     public String getAnswer(int current) {
         return questions.get(current).getRight();
     }
 
-
+    public void sendScore(Match match) {
+        Gson gson = new Gson();
+        String scoreRequest = gson.toJson(match);
+        gameApi.sendScore(scoreRequest);
+    }
 }
 
 

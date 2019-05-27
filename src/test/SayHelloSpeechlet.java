@@ -69,22 +69,34 @@ public class SayHelloSpeechlet extends SinglePlayer implements SpeechletV2 {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if ("End".equals(intentName) & functionality.getCurrent() != functionality.getMAX_QUESTIONS() & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
-            return functionality.endQuiz(intent, session);
+            //look at this again
+        } else if ("End".equals(intentName)) {
+            if (functionality.getCurrent() != functionality.getMAX_QUESTIONS() & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
+                return functionality.endQuiz(intent, session);
+            } else if (session.getAttribute(gameMode).equals(1)) {
+                return multiplayer.endQuiz(intent, session);
+            }
+
         } else if ("Repeat".equals(intentName) & session.getAttribute(gameMode).equals(0)) {
             return functionality.repeatQuestion(intent, session);
-        } else if ("Skip".equals(intentName) & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
-            return functionality.skipQuestion(intent, session);
+
+        } else if ("Skip".equals(intentName)) {
+
+            if (functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
+                return functionality.skipQuestion(intent, session);
+
+            } else {
+
+                return multiplayer.skipQuestion(intent, session);
+
+            }
+
+
         } else if ("Myscore".equals(intentName) & functionality.isGameSesssion() & session.getAttribute(gameMode).equals(0)) {
             return functionality.getMyScore(intent, session);
         } else if ("Multiplayer".equals(intentName) & !functionality.isGameSesssion()) {
             dispatchProgressiveResponse(request.getRequestId(), "Searching for another player ", systemState, apiEndpoint);
             return multiplayer.startMultiplayer(requestEnvelope);
-
-//        } else if ("Answer".equals(intentName) & session.getAttribute(gameMode).equals(1) & !functionality.isGameSesssion()) {
-//        } else if ("Answer".equals(intentName)) {
-//
-//            return multiplayer.playerResponse(intent, session);
 
         } else if ("Difficulty".equals(intentName) & functionality.isOptionsGiven() & session.getAttribute(gameMode).equals(0)) {
 

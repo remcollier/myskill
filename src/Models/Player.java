@@ -23,7 +23,6 @@ public class Player implements Serializable {
     private String id;
     private int score;
     private int count;
-    private String outcome;
 
 
     public int getScore() {
@@ -42,11 +41,4 @@ public class Player implements Serializable {
         this.count = count;
     }
 
-    public String getOutcome() {
-        return outcome;
-    }
-
-    public void setOutcome(String outcome) {
-        this.outcome = outcome;
-    }
 }
