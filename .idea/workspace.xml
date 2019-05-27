@@ -2,21 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b803fdb-e4b3-428b-b3db-39b506393cab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Models/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Multiplayer/Multiplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Multiplayer/Multiplayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Multiplayer/MultiplayerGameFunctionaility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Multiplayer/MultiplayerGameFunctionaility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/REST/MultiplayerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/REST/MultiplayerAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SinglePlayer/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SinglePlayer/TestClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/SayHelloSpeechlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Models/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Models/Match.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Multiplayer/Multiplayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Multiplayer/Multiplayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Multiplayer/MultiplayerGameFunctionaility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Multiplayer/MultiplayerGameFunctionaility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SinglePlayer/TestClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SinglePlayer/TestClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test/SayHelloSpeechlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/test/SayHelloSpeechlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Match.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Question.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Quiz.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Score.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/Token.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Multiplayer/Multiplayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Multiplayer/MultiplayerGameFunctionaility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/MultiplayerAPI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/SinglePlayerApi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/Utils/RequestObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/Utils/URL.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/Utils/WebResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/Utils/WebUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/questionsApi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/REST/quizApi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SinglePlayer/SinglePlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SinglePlayer/SinglePlayerFunctionaility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SinglePlayer/TestClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test/SayHelloRequestStreamHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test/SayHelloSpeechlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/myskill-1.0-SNAPSHOT.jar" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/src/Multiplayer/MultiplayerGameFunctionaility.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="738">
-              <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
+              <caret line="156" selection-start-line="156" selection-end-line="156" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,23 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="79" column="92" lean-forward="true" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/SinglePlayer/TestClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="52">
+              <caret line="79" column="92" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -535,7 +534,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294515000" />
+    <option name="totallyTimeSpent" value="294567000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -559,7 +558,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49785408" visible="true" weight="0.1493976" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49785408" visible="true" weight="0.1493976" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49928468" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -576,7 +575,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" weight="0.14592275" />
+      <window_info active="true" anchor="right" id="Maven" order="5" visible="true" weight="0.14592275" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" weight="0.3297568" />
@@ -872,8 +871,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/SayHelloSpeechlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="79" column="92" lean-forward="true" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
+        <state relative-caret-position="52">
+          <caret line="79" column="92" selection-start-line="79" selection-start-column="92" selection-end-line="79" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -883,7 +882,7 @@
     <entry file="file://$PROJECT_DIR$/src/Multiplayer/MultiplayerGameFunctionaility.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
-          <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
