@@ -103,24 +103,21 @@
         },
         {
           "name": "SelectQuiz",
-          "slots": [
-            {
-              "name": "QuizDecision",
-              "type": "QuizDecision"
-            }
-          ],
+          "slots": [],
           "samples": [
-            "i {QuizDecision} this quiz",
-            "I want {QuizDecision}",
-            "{QuizDecision} please",
-            "i {QuizDecision}",
-            "{QuizDecision}"
+            "give me a random quiz",
+            "any quiz",
+            "random quiz please",
+            "play random quiz",
+            "a random quiz",
+            "Random quiz"
           ]
         },
         {
           "name": "PlayNext",
           "slots": [],
           "samples": [
+            "play another random quiz",
             "yeah next quiz",
             "next quiz",
             "play a different quiz",
@@ -133,12 +130,49 @@
           "name": "Token",
           "slots": [],
           "samples": [
+            "code please",
+            "generate a code",
             "give me a token",
             "can i get a token",
             "token please",
             "generate my token",
             "generate a token",
             "Give me my token"
+          ]
+        },
+        {
+          "name": "PlayQuizOD",
+          "slots": [],
+          "samples": [
+            "quiz the day",
+            "quiz day",
+            "quiz of day",
+            "play quiz of the day",
+            "quiz of the day"
+          ]
+        },
+        {
+          "name": "Difficulty",
+          "slots": [
+            {
+              "name": "choice",
+              "type": "levels"
+            }
+          ],
+          "samples": [
+            "i pick {choice}",
+            "{choice} please",
+            "I choose {choice}",
+            "{choice}"
+          ]
+        },
+        {
+          "name": "Multiplayer",
+          "slots": [],
+          "samples": [
+            "multiplayer please",
+            "multiplayer",
+            "Play multiplayer"
           ]
         }
       ],
@@ -150,6 +184,9 @@
               "name": {
                 "value": "D",
                 "synonyms": [
+                  "deeee",
+                  "d",
+                  "ddd",
                   "dd",
                   "d.",
                   "d",
@@ -165,6 +202,10 @@
               "name": {
                 "value": "C",
                 "synonyms": [
+                  "ci",
+                  "ceeee",
+                  "c",
+                  "C",
                   "cc",
                   "cee",
                   "c",
@@ -178,6 +219,10 @@
               "name": {
                 "value": "B",
                 "synonyms": [
+                  "b",
+                  "b.",
+                  "bb",
+                  "B",
                   "B.",
                   "bee",
                   "bb",
@@ -191,6 +236,10 @@
               "name": {
                 "value": "A",
                 "synonyms": [
+                  "A",
+                  "a",
+                  "aaaaaa",
+                  "a",
                   "A.",
                   "aa",
                   "a",
@@ -202,21 +251,40 @@
           ]
         },
         {
-          "name": "QuizDecision",
+          "name": "levels",
           "values": [
             {
               "name": {
-                "value": "Deny",
+                "value": "Intermediate",
                 "synonyms": [
-                  "deny"
+                  "Intermediate",
+                  "Intermediate",
+                  "Intermediate",
+                  "medium",
+                  "Medium",
+                  "medium"
                 ]
               }
             },
             {
               "name": {
-                "value": "Accept",
+                "value": "Hard",
                 "synonyms": [
-                  "accept"
+                  "hard",
+                  "ard",
+                  "hard",
+                  "Hard",
+                  "hard"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "Easy",
+                "synonyms": [
+                  "easy",
+                  "Easy",
+                  "easy"
                 ]
               }
             }
